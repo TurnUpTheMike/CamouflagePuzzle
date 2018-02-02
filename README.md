@@ -11,7 +11,7 @@ Structuring this work:
 - Create a tangible output from a Puzzle -
 - Structure and properties to tie all of these together -
 
-
+______________________________________________________________________
 - Create a Word Bank -
 
 No hypenated word

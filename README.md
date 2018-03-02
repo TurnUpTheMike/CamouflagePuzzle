@@ -1,6 +1,6 @@
-# CamoflaguePuzzle
+# CamouflagePuzzle
 
-This respository will create the Camoflague puzzle.  See the examplepuzzle.pdf
+This respository will create the Camouflage puzzle.  See the examplepuzzle.pdf
 
 
 Structuring this work:

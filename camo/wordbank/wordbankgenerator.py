@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 
 
 class WordBankGeneratorBase(ABC):
-    def __init__(self, app_properties):
-        self.properties = app_properties
+    def __init__(self, properties):
+        self.properties = properties
 
     @abstractmethod
     def generate_word_bank(self):
@@ -12,8 +12,8 @@ class WordBankGeneratorBase(ABC):
 
 
 class WordBankGeneratorHardCoded(WordBankGeneratorBase):
-    def __init__(self, app_properties):
-        super().__init__(app_properties)
+    def __init__(self, properties):
+        super().__init__(properties)
 
     def generate_word_bank(self):
         bank = WordBank(app_properties=self.properties)
@@ -33,9 +33,9 @@ class WordBankGeneratorHardCoded(WordBankGeneratorBase):
             'm': ['smile'],
             'n': ['stamina'],
             'o': ['blood'],
-            'p': ['partner'],
-            'r': ['quilt'],
-            'q': ['morning'],
+            'p': ['sample'],
+            'r': ['partner'],
+            'q': ['sequence'],
             's': ['respect'],
             't': ['flatten'],
             'u': ['hundred'],

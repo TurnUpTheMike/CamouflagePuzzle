@@ -7,6 +7,7 @@ class Properties:
     def __init__(self):
         self.min_word_length = 5
         self.max_word_length = 10
+        self.puzzle_row_length = 13
 
 
 class TestWordBank(unittest.TestCase):

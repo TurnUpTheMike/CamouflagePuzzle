@@ -3,12 +3,12 @@ from collections import defaultdict, OrderedDict
 def sortWords(hashes):
     lenmap = defaultdict(list)
     ordered = []
-    for alpha, words in hashes.items():
-        lenmap[len(words)] += alpha
+    for letter, words in hashes.items():
+        lenmap[len(words)] += letter
 
     for ln in sorted(lenmap.keys()):
-        for alpha in lenmap[ln]:
-            ordered.append(alpha)
+        for letter in lenmap[ln]:
+            ordered.append(letter)
 
     return ordered
         

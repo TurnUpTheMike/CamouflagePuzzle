@@ -1,6 +1,12 @@
 from unittest import TestCase
 from wordbank.answerkey import sortWords, Solver
 
+class FakeWordBank():
+
+    def __init__(self, hashes):
+        self.hashes_by_letter = hashes
+
+
 class TestSorting(TestCase):
 
     def testSorting(self):
@@ -24,7 +30,20 @@ class TestSolution(TestCase):
             'c' : ['gamma']
         }
 
-        solver = Solver(ordered, hashes)
+        solver = Solver(FakeWordBank(hashes), ordered)
+        solution = solver.solve()
+
+        self.assertEqual(['alpha', 'beta', 'gamma'], solution)
+
+
+    def testNoOrdered(self):
+        hashes = {
+            'a' : ['alpha'],
+            'b' : ['alpha', 'beta'],
+            'c' : ['alpha', 'beta', 'gamma']
+        }
+
+        solver = Solver(FakeWordBank(hashes))
         solution = solver.solve()
 
         self.assertEqual(['alpha', 'beta', 'gamma'], solution)
@@ -37,7 +56,7 @@ class TestSolution(TestCase):
             'c' : ['alpha', 'gamma']
         }
 
-        solver = Solver(ordered, hashes)
+        solver = Solver(FakeWordBank(hashes), ordered)
         solution = solver.solve()
 
         self.assertEqual(['alpha', 'beta', 'gamma'], solution)
@@ -50,7 +69,7 @@ class TestSolution(TestCase):
             'c' : ['alpha']
         }
 
-        solver = Solver(ordered, hashes)
+        solver = Solver(FakeWordBank(hashes), ordered)
         solution = solver.solve()
 
         self.assertEqual(['gamma', 'beta', 'alpha'], solution)

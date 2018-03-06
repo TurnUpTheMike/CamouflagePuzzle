@@ -1,25 +1,5 @@
 from collections import defaultdict, OrderedDict
 
-class AnswerKey():
-
-    def __init__():
-        self.answers = set()
-        pass
-
-    def contains(word):
-        return word in self.answers
-
-    def add(word):
-        self.answers.add(word) 
-
-
-class WordBank():
-
-    def __init__():
-        self.hashes = {alpha: set for alpha in "abcdefghijklmnopqrstuvwxyz" }
-
-
-
 def sortWords(hashes):
     lenmap = defaultdict(list)
     ordered = []
@@ -36,9 +16,11 @@ def sortWords(hashes):
 
 class Solver():
 
-    def __init__(self, ordered,hashes):
+    def __init__(self, bank, ordered=None):
+        self.hashes = bank.hashes_by_letter
+        if ordered is None:
+            ordered = sortWords(self.hashes)
         self.ordered = ordered
-        self.hashes = hashes
         self.tried = defaultdict(set)
 
 
@@ -68,14 +50,11 @@ class Solver():
 
 
 def create_solution(bank):
-    # for a word bank,
-    # create the ordered list.
-    ordered = sortWords(bank.hashes)
-    
-    # then populate the solver with the order and the appropriate hashes.
-    solver = Solver(ordered, bank.hashes)
+    # populate the solver with the appropriate hashes.
+    solver = Solver(bank)
 
     # now from bottom of list, go up and try to find words
     solution = solver.solve()
 
+    # return the list
     return solution

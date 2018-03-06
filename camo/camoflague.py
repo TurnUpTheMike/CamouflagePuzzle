@@ -2,6 +2,11 @@ import argparse
 import os
 from wordbank.wordbankgenerator import WordBankGeneratorHardCoded
 from wordbank.flatfilesgenerator import WordBankGeneratorFlatFiles
+from wordbank.alangenerator import WordBankGeneratorAlan
+from wordbank.wordbank import Discriminator
+from solution.answerkey import AnswerKey, AnswerKeyGenerator
+from solution.puzzle import Puzzle, PuzzleGenerator
+from packaging.puzzlepackager import PuzzleToPDF
 
 
 class Camoflague:
@@ -9,8 +14,8 @@ class Camoflague:
     DEFAULT_DIR_WORD_BANK_SRCS = "/lib/word_bank_src"
     MIN_WORD_LENGTH = 5
     MAX_WORD_LENGTH = 10
-    PUZZLE_LINE_LENGTH = 13
-    DEFAULT_WORD_BANK_GENERATOR = 'flatfiles'
+    PUZZLE_ROW_LENGTH = 13
+    DEFAULT_WORD_BANK_GENERATOR = 'hardcoded'
 
     def run(self):
         args = self.create_argument_parser()
@@ -19,12 +24,20 @@ class Camoflague:
         print(args)
         print("---------------")
 
-        wordbank_generator = self.get_word_bank_generator(args)
+        wordbank_generator = self.get_wordbank_generator(args)
         wordbank = wordbank_generator.generate_word_bank()
+        wordbank.print_wordbank()
 
-        # print("----------WORD BANK---------")
-        # print(wordbank.hash_by_letter)
-        # print("----------------------------")
+        answerkey_generator = self.get_answerkey_generator(args)
+        answerkey = answerkey_generator.generate_answer_key(wordbank)
+        answerkey.print_answerkey()
+
+        puzzle_generator = self.get_puzzle_generator(args)
+        puzzle = puzzle_generator.generate_puzzle(answerkey)
+        puzzle.print_puzzle()
+
+        packaging_service = self.get_puzzle_packager(args)
+        packaging_service.write_puzzle(puzzle)
 
     def create_argument_parser(self):
         parser = argparse.ArgumentParser(description='Camoflauge Puzzle',
@@ -36,9 +49,9 @@ class Camoflague:
         parser.add_argument('--max-word-length', dest='max_word_length',
                             default=Camoflague.MAX_WORD_LENGTH)
         parser.add_argument('--puzzle-row-length', dest='puzzle_row_length',
-                            default=Camoflague.PUZZLE_LINE_LENGTH)
+                            default=Camoflague.PUZZLE_ROW_LENGTH)
         parser.add_argument('--bank-generator', dest="bank_generator", type=str,
-                            help="options: hardcoded | flatfiles",
+                            help="options: hardcoded | flatfiles | alan",
                             default=Camoflague.DEFAULT_WORD_BANK_GENERATOR)
         parser.add_argument('--dir-answer-keys', dest='dir_of_answer_keys', type=str,
                             default=cwd + Camoflague.DEFAULT_DIR_ANSWER_KEYS,
@@ -50,7 +63,7 @@ class Camoflague:
         arguments = parser.parse_args()
         return arguments
 
-    def get_word_bank_generator(self, args):
+    def get_wordbank_generator(self, args):
         """
         A factory method to create an instance of a WordBankGenerator
         :param args:
@@ -59,8 +72,34 @@ class Camoflague:
 
         if args.bank_generator == 'flatfiles':
             return WordBankGeneratorFlatFiles(args)
+        elif args.bank_generator == 'alan':
+            discriminator = Discriminator(min_length=args.min_word_length, max_length=args.max_word_length)
+            return WordBankGeneratorAlan(args, discriminator)
 
         return WordBankGeneratorHardCoded(args)
+
+    def get_answerkey_generator(self, args):
+        """
+        A factory method to create an instance of an AnswerKeyGenerator
+        :param args: 
+        :return: 
+        """
+        return AnswerKeyGenerator(args)
+
+    def get_puzzle_generator(self, args):
+        """
+        A factory method to create an instance of a PuzzleGenerator
+        :param args: 
+        :return: 
+        """
+        return PuzzleGenerator(args)
+
+    def get_puzzle_packager(self, args):
+        """
+        A factory method to package the puzzle with
+        :return: 
+        """
+        return PuzzleToPDF(args)
 
 if __name__ == '__main__':
     print("Starting Camoflauge Puzzle Creator")

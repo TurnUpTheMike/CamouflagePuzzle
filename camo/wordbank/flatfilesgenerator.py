@@ -5,55 +5,18 @@ from wordbank.wordbank import WordBank
 
 
 class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
-    def __init__(self, app_properties):
-        super().__init__(app_properties)
+    def __init__(self, properties):
+        super().__init__(properties)
         self.word_bank = None
         self.negative_word_bank = None
 
     def generate_word_bank(self):
-        print("Enter FlatFiles Generator")
         self.create_negative_word_bank(self.properties.dir_of_answer_keys)
 
-        print("--------Negative Bank---------")
-        print(self.negative_word_bank)
-        print("------------------------------")
-
+        self.word_bank = WordBank(self.properties)
         self.read_word_bank_sources(self.properties.dir_of_word_bank_src)
 
-        self.word_bank = self.populate_test_word_bank()
         return self.word_bank
-
-    def populate_test_word_bank(self):
-        bank = WordBank(app_properties=self.properties)
-        bank.hash_by_letter = {
-            'a': ['banana'],
-            'b': ['bubble'],
-            'c': ['practice'],
-            'd': ['candle'],
-            'e': ['treacherous'],
-            'f': ['perfect'],
-            'g': ['laugh'],
-            'h': ['beach'],
-            'i': ['guitar'],
-            'j': ['trajectory'],
-            'k': ['blanket'],
-            'l': ['color'],
-            'm': ['smile'],
-            'n': ['stamina'],
-            'o': ['blood'],
-            'p': ['partner'],
-            'r': ['quilt'],
-            'q': ['morning'],
-            's': ['respect'],
-            't': ['flatten'],
-            'u': ['hundred'],
-            'v': ['alive'],
-            'w': ['below'],
-            'x': ['expert'],
-            'y': ['player'],
-            'z': ['zebra']
-        }
-        return bank
 
     def read_word_bank_sources(self, dir_word_bank_src):
         for path, dirs, files in os.walk(dir_word_bank_src):
@@ -69,8 +32,8 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
             word = self.format_word(original_word)
 
             if word not in self.negative_word_bank:
-                self.negative_word_bank[word] = True
-                print("Adding Word " + word)
+                self.negative_word_bank.add(word)
+                self.word_bank.add_word(word)
 
     def format_word(self, word):
         """
@@ -88,7 +51,7 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
         Populates the negative_word_bank from the dir_of_answer_keys
         :return:
         """
-        self.negative_word_bank = {}
+        self.negative_word_bank = set()
 
         for path, dirs, files in os.walk(dir_answer_keys):
             for filename in files:
@@ -107,7 +70,7 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
         file_contents = file_handle.read()
         for word in file_contents.split():
             formatted_word = self.format_word(word)
-            self.negative_word_bank[formatted_word] = True
+            self.negative_word_bank.add(formatted_word)
 
     def is_valid_source_file_name(self, filename):
         """

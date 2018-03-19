@@ -16,7 +16,7 @@ class WordBankGeneratorHardCoded(WordBankGeneratorBase):
         super().__init__(properties)
 
     def generate_word_bank(self):
-        bank = WordBank(app_properties=self.properties)
+        bank = WordBank(properties=self.properties)
         bank.hash_by_letter = {
             'a': ['banana'],
             'b': ['bubble'],

@@ -5,18 +5,18 @@ This respository will create the Camouflage puzzle.  See the examplepuzzle.pdf
 
 Structuring this work:
 
-- Create a Word Bank -
-- Create an AnswerKey From the Word Bank -
-- Create a Puzzle From the Answer Key -
-- Create a tangible output from a Puzzle -
-- Structure and properties to tie all of these together -
+- [Create a Word Bank](https://github.com/TurnUpTheMike/CamouflagePuzzle#create-a-word-bank)
+- [Create an AnswerKey From the Word Bank](https://github.com/TurnUpTheMike/CamouflagePuzzle#create-an-answerkey-from-the-word-bank)
+- [Create a Puzzle From the Answer Key](https://github.com/TurnUpTheMike/CamouflagePuzzle#create-a-puzzle-from-the-answer-key)
+- [Create a tangible output from a Puzzle](https://github.com/TurnUpTheMike/CamouflagePuzzle#create-a-tangible-output-from-a-puzzle)
+- [Structure and properties to tie all of these together](https://github.com/TurnUpTheMike/CamouflagePuzzle#structure-and-properties-to-tie-all-of-these-together)
 
 Other:
-- Running Tests -
+- [Running Tests](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#running-tests)
 
 ______________________________________________________________________
-- Create a Word Bank -
-----------------------
+Create a Word Bank
+------------------
 
 No hypenated word
 No proper nouns
@@ -29,8 +29,8 @@ Should this Word Bank really be 26 separate word banks?
 'a' => Bank of Words for letter 'a'
 
 
-- Create an AnswerKey From the Word Bank -
-------------------------------------------
+Create an AnswerKey From the Word Bank
+--------------------------------------
 
 Choose words from the Word Bank
 The letter chosen must be index 6 of the word, and the word must fit within the puzzle.
@@ -39,22 +39,22 @@ Write to a ?txt? file this answer key for future negative word banks
 How well can we choose words such that letters could go in multiple places?
 
 
-- Create a Puzzle From the Answer Key -
----------------------------------------
+Create a Puzzle From the Answer Key
+-----------------------------------
 
 Randomize the rows the of the answer
 Add letters to pad out the length of the answer key to 13 characters
 Do we add more common letters to make the word less obvious?
 
 
-- Create a tangible output from a Puzzle -
-------------------------------------------
+Create a tangible output from a Puzzle
+--------------------------------------
 
 I'm thinking of a .pdf or a .html file.  Something that we can print out.
 
 
-- Structure and properties to tie all of these together -
----------------------------------------------------------
+Structure and properties to tie all of these together
+-----------------------------------------------------
 
 How do we kick this off?  command line?
 What properties do we accept?
@@ -67,15 +67,40 @@ Minimum word length?          currently 5
 
 
 
-- Other Questions -
--------------------
+Other Questions
+---------------
 
 What determines puzzle difficulty? How can we make more difficult puzzles?
 
 
-- Running Tests -
------------------
+Running Tests
+-------------
 
 Running Unit Tests
+```
+cd CamouflagePuzzle/camo
+
+Run all the tests
+python3 -m unittest
+
+Run a specific test
+python3 -m unittest solution.test.testpuzzle.TestPuzzleGenerator.test_create_right_padding
+```
 
 Running End To End
+
+```
+cd CamouflagePuzzle/camo
+
+Run with all defaults
+python3 camoflague.py
+
+Run hardcoded version
+python3 camoflague.py --bank-generator hardcoded
+
+Run Pants way
+python3 camoflague.py --bank-generator flatfiles
+
+Run Alan way
+python3 camoflague.py --bank-generator alan
+```

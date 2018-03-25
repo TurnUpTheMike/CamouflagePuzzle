@@ -5,18 +5,18 @@ This respository will create the Camouflage puzzle.  See the examplepuzzle.pdf
 
 Structuring this work:
 
-- Create a Word Bank -
-- Create an AnswerKey From the Word Bank -
-- Create a Puzzle From the Answer Key -
-- Create a tangible output from a Puzzle -
-- Structure and properties to tie all of these together -
+Create a Word Bank
+Create an AnswerKey From the Word Bank
+Create a Puzzle From the Answer Key
+Create a tangible output from a Puzzle
+Structure and properties to tie all of these together
 
 Other:
-- Running Tests -
+Running Tests
 
 ______________________________________________________________________
-- Create a Word Bank -
-----------------------
+Create a Word Bank
+------------------
 
 No hypenated word
 No proper nouns
@@ -29,8 +29,8 @@ Should this Word Bank really be 26 separate word banks?
 'a' => Bank of Words for letter 'a'
 
 
-- Create an AnswerKey From the Word Bank -
-------------------------------------------
+Create an AnswerKey From the Word Bank
+--------------------------------------
 
 Choose words from the Word Bank
 The letter chosen must be index 6 of the word, and the word must fit within the puzzle.
@@ -39,22 +39,22 @@ Write to a ?txt? file this answer key for future negative word banks
 How well can we choose words such that letters could go in multiple places?
 
 
-- Create a Puzzle From the Answer Key -
----------------------------------------
+Create a Puzzle From the Answer Key
+-----------------------------------
 
 Randomize the rows the of the answer
 Add letters to pad out the length of the answer key to 13 characters
 Do we add more common letters to make the word less obvious?
 
 
-- Create a tangible output from a Puzzle -
-------------------------------------------
+Create a tangible output from a Puzzle
+--------------------------------------
 
 I'm thinking of a .pdf or a .html file.  Something that we can print out.
 
 
-- Structure and properties to tie all of these together -
----------------------------------------------------------
+Structure and properties to tie all of these together
+-----------------------------------------------------
 
 How do we kick this off?  command line?
 What properties do we accept?
@@ -67,14 +67,14 @@ Minimum word length?          currently 5
 
 
 
-- Other Questions -
--------------------
+Other Questions
+---------------
 
 What determines puzzle difficulty? How can we make more difficult puzzles?
 
 
-- Running Tests -
------------------
+Running Tests
+-------------
 
 Running Unit Tests
 

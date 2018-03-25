@@ -1,5 +1,7 @@
 from unittest import TestCase
-from wordbank.answerkey import sortWords, Solver
+
+from solution.alananswerkey import sortWords, Solver
+
 
 class FakeWordBank():
 

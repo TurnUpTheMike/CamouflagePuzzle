@@ -14,7 +14,7 @@ class TestWordBank(unittest.TestCase):
 
     def setUp(self):
         self.properties = Properties()
-        self.wordbank = WordBank(app_properties=self.properties)
+        self.wordbank = WordBank(properties=self.properties)
 
     @parameterized.expand([
         ('couch', True),

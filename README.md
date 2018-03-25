@@ -77,5 +77,30 @@ Running Tests
 -------------
 
 Running Unit Tests
+```
+cd CamouflagePuzzle/camo
+
+Run all the tests
+python3 -m unittest
+
+Run a specific test
+python3 -m unittest solution.test.testpuzzle.TestPuzzleGenerator.test_create_right_padding
+```
 
 Running End To End
+
+```
+cd CamouflagePuzzle/camo
+
+Run with all defaults
+python3 camoflague.py
+
+Run hardcoded version
+python3 camoflague.py --bank-generator hardcoded
+
+Run Pants way
+python3 camoflague.py --bank-generator flatfiles
+
+Run Alan way
+python3 camoflague.py --bank-generator alan
+```

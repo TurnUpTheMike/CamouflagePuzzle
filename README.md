@@ -5,14 +5,14 @@ This respository will create the Camouflage puzzle.  See the examplepuzzle.pdf
 
 Structuring this work:
 
-Create a Word Bank
-Create an AnswerKey From the Word Bank
-Create a Puzzle From the Answer Key
-Create a tangible output from a Puzzle
-Structure and properties to tie all of these together
+- Create a Word Bank
+- Create an AnswerKey From the Word Bank
+- Create a Puzzle From the Answer Key
+- Create a tangible output from a Puzzle
+- Structure and properties to tie all of these together
 
 Other:
-Running Tests
+- Running Tests
 
 ______________________________________________________________________
 Create a Word Bank

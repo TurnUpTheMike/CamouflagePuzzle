@@ -93,16 +93,13 @@ class TestPuzzleGenerator(unittest.TestCase):
         actual = self.generator.create_right_padding(letter_index, word_length)
         self.assertEqual(expected, actual, "letter_index = {} word_length = {}".format(letter_index, word_length))
 
+    def test_create_letter_to_append(self):
+        random_letter_1 = self.generator.create_letter_to_append()
+        random_letter_2 = self.generator.create_letter_to_append()
+        random_letter_3 = self.generator.create_letter_to_append()
 
-
-
-
-
-
-
-
-
-
+        # The same letter three times in a row is not random
+        self.assertFalse(random_letter_1 == random_letter_2 and random_letter_1 == random_letter_3)
 
 
 

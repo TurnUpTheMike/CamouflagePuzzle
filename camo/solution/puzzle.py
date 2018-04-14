@@ -1,3 +1,6 @@
+import string
+import random
+
 
 class Puzzle:
     def __init__(self):
@@ -23,7 +26,8 @@ class PuzzleGenerator:
             puzzle_row_text = self.create_puzzle_row(letter, word)
             puzzle.puzzle_rows.append(puzzle_row_text)
 
-        # Should randomize rows here
+        # Randomize the rows
+        random.shuffle(puzzle.puzzle_rows)
 
         return puzzle
 
@@ -62,5 +66,8 @@ class PuzzleGenerator:
     def create_padding_text_of_length(self, padding_length):
         text = []
         for x in range(0, padding_length):
-            text.append('A')
+            text.append(self.create_letter_to_append())
         return ''.join(text)
+
+    def create_letter_to_append(self):
+        return random.choice(string.ascii_uppercase)

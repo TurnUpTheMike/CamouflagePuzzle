@@ -9,6 +9,7 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
         super().__init__(properties)
         self.word_bank = None
         self.negative_word_bank = None
+        self.verbose = True
 
     def generate_word_bank(self):
         self.create_negative_word_bank(self.properties.dir_of_answer_keys)
@@ -22,7 +23,7 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
         for path, dirs, files in os.walk(dir_word_bank_src):
             for filename in files:
                 if self.is_valid_source_file_name(filename):
-                    print("Reading file " + os.path.join(path, filename))
+                    self.verbose_print("Reading file " + os.path.join(path, filename))
                     self.read_source_file(os.path.join(path, filename))
 
     def read_source_file(self, filename):
@@ -79,3 +80,7 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
         :return: 
         """
         return filename.endswith(".txt")
+
+    def verbose_print(self, msg):
+        if self.verbose:
+            print(msg)

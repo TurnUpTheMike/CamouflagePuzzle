@@ -16,6 +16,7 @@ class Camoflague:
     MAX_WORD_LENGTH = 10
     PUZZLE_ROW_LENGTH = 13
     DEFAULT_WORD_BANK_GENERATOR = 'hardcoded'
+    PUZZLE_TEMPLATE = "/packaging/puzzle_template.html"
 
     def run(self):
         args = self.create_argument_parser()
@@ -59,6 +60,11 @@ class Camoflague:
         parser.add_argument('--dir-word-bank', dest='dir_of_word_bank_src', type=str,
                             default=cwd + Camoflague.DEFAULT_DIR_WORD_BANK_SRCS,
                             help="A directory where word bank text sources are read from")
+        parser.add_argument('--do-package-puzzle', action='store_true',
+                            help="Will create a pdf of the puzzle")
+        parser.add_argument('--puzzle-template', dest='puzzle_template', type=str,
+                            default=cwd + Camoflague.PUZZLE_TEMPLATE,
+                            help="The html file that is a template for the puzzle output")
 
         arguments = parser.parse_args()
         return arguments

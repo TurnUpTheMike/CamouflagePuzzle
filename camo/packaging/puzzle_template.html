@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>{{ title }}</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Camouflage</td>
+    </tr>
+</table>
+Hello.
+<table>
+    <tbody>
+        {% for puzzle_row in puzzle_rows %}
+        <tr>
+            {% for index in range(0, puzzle_row_length) %}
+                {% if index != chosen_letter_index: %}
+                    <td>{{puzzle_row[index]}}</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

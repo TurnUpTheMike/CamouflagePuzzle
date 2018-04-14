@@ -2,6 +2,7 @@ from jinja2 import Environment, FileSystemLoader
 import os
 import pdfkit
 
+
 class PuzzlePackager:
     def __init__(self, properties):
         self.properties = properties

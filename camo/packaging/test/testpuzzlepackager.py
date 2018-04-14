@@ -30,9 +30,9 @@ class TestPuzzlePackager(unittest.TestCase):
     def test_puzzle_to_html(self):
         packager = PuzzlePackager(properties=self.properties)
         html = packager.puzzle_to_html(self.puzzle)
-        print("-------------------------")
-        print(html)
-        print("-------------------------")
+        # print("-------------------------")
+        # print(html)
+        # print("-------------------------")
         # packager.write_puzzle(self.puzzle)
 
         self.assertEqual(1, 1)

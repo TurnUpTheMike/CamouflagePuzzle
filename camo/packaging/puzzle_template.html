@@ -1,28 +1,221 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>{{ title }}</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Camouflage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+    font-family: sans-serif;
+    font-size: 36pt;
+    line-height: 50pt;
+    margin: 12.7mm;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin-top: 0;
+}
+
+.puzzle__header {
+    border: 1px solid orange;
+    margin-bottom: 2rem;
+}
+
+.puzzle__header .puzzle__header--title {
+    position: relative;
+}
+
+.puzzle__header .puzzle__header--title .title {
+    padding: 80pt 15pt;
+    background: orange;
+    color: white;
+    font-size: 140pt;
+}
+
+.puzzle__header .puzzle__header--title .icon {
+    width: 25px;
+    display: inline-block;
+    margin-left: .5rem;
+}
+
+.puzzle__header .puzzle__header--title .icon svg path {
+    fill: white !important;
+}
+
+.puzzle__header .puzzle__header--title .subline {
+    position: absolute;
+    font-size: 30pt;
+    right: 15px;
+    top: 38%;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
+}
+
+.puzzle__header .puzzle__header--content {
+    padding: 15px;
+}
+
+.legend {
+    background: lightgray;
+    padding: 15px 10px;
+    margin-bottom: 2rem;
+    width: 100%;
+    border: 2px solid black;
+}
+
+.legend .cell {
+    text-align: center;
+    width: 50px;
+}
+
+.grid-container {
+    width: 60%;
+    margin: 0 auto;
+    border: 5px solid black;
+}
+
+.grid-container .cell {
+    text-align: center;
+    background: #fff;
+    padding: 30px 0;
+    border: 2px solid black;
+    vertical-align: middle;
+    width: 50px;
+    height: -webkit-calc(60px - 1em);
+    height: -moz-calc(60px - 1em);
+    height: calc(60px - 1em);
+    font-size: 80pt;
+    text-transform: uppercase;
+}
+
+.grid-container .cell:nth-child(13n) {
+    page-break-after: always;
+    -webkit-column-break-after: always;
+            break-after: always;
+}
+
+.grid-container .cell:nth-child(13n + 7) {
+    border-right-width: 5px;
+    border-left-width: 5px;
+}
+
+    </style>
 </head>
 <body>
-<table>
-    <tr>
-        <td>Camouflage</td>
-    </tr>
-</table>
-Hello.
-<table>
-    <tbody>
+    <div class="puzzle__header">
+        <div class="puzzle__header--title">
+            <h1 class="title">Camouflage00</h1>
+            <span class="subline">From the games library.</span>
+        </div> <!-- /title-->
+        <div class="puzzle__header--content">
+            <p>Place each of the 26 letters of the alphabet once in the grid below to form a common word of <i>five or more letters</i> reading across in each line. Not all the letters in each line will be used; it's up to you to determine which ones are needed. Some letters may fit in more than one of the empty squares to form familiar words; however, only one arrangment of all of the letters of the alphabet will complete a word in each row. Hyphenated words, proper nouns, and plurals are not used.</p>
+        </div>
+    </div>
+    <table class="legend" cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr>
+                <td class="cell">
+                    A
+                </td>
+                <td class="cell">
+                    B
+                </td>
+                <td class="cell">
+                    C
+                </td>
+                <td class="cell">
+                    D
+                </td>
+                <td class="cell">
+                    E
+                </td>
+                <td class="cell">
+                    F
+                </td>
+                <td class="cell">
+                    G
+                </td>
+                <td class="cell">
+                    H
+                </td>
+                <td class="cell">
+                    I
+                </td>
+                <td class="cell">
+                    J
+                </td>
+                <td class="cell">
+                    K
+                </td>
+                <td class="cell">
+                    L
+                </td>
+                <td class="cell">
+                    M
+                </td>
+                <td class="cell">
+                    N
+                </td>
+                <td class="cell">
+                    O
+                </td>
+                <td class="cell">
+                    P
+                </td>
+                <td class="cell">
+                    Q
+                </td>
+                <td class="cell">
+                    R
+                </td>
+                <td class="cell">
+                    S
+                </td>
+                <td class="cell">
+                    T
+                </td>
+                <td class="cell">
+                    U
+                </td>
+                <td class="cell">
+                    V
+                </td>
+                <td class="cell">
+                    W
+                </td>
+                <td class="cell">
+                    X
+                </td>
+                <td class="cell">
+                    Y
+                </td>
+                <td class="cell">
+                    Z
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="grid-container" cellpadding="0" cellspacing="0">
+         <tbody>
         {% for puzzle_row in puzzle_rows %}
         <tr>
             {% for index in range(0, puzzle_row_length) %}
                 {% if index != chosen_letter_index: %}
-                    <td>{{puzzle_row[index]}}</td>
+                    <td class="cell">{{puzzle_row[index]}}</td>
                 {% else %}
-                    <td></td>
+                    <td class="cell"></td>
                 {% endif %}
             {% endfor %}
         </tr>
         {% endfor %}
-    </tbody>
-</table>
+        </tbody>
+    </table>
 </body>
 </html>

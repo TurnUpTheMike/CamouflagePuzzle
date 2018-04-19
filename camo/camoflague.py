@@ -85,7 +85,7 @@ class Camoflague:
 
         # Output Sources
         parser.add_argument('--puzzle-output-dir', dest='puzzle_output_dir', type=str,
-                            default=cwd + Camoflague.DEFAULT_PUZZLE_OUTPUT_DIR,
+                            default=Camoflague.DEFAULT_PUZZLE_OUTPUT_DIR,
                             help="The directory to write the pdf puzzle to")
         parser.add_argument('--puzzle-pdf-name', dest='puzzle_pdf_name', type=str,
                             default=Camoflague.PUZZLE_PDF_NAME,

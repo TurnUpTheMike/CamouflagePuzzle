@@ -10,6 +10,8 @@ class Properties:
         current_directory = os.path.dirname(os.path.abspath(__file__))
         parent_directory = os.path.abspath(os.path.join(current_directory, os.pardir))
         self.puzzle_template = parent_directory + "/puzzle_template.html"
+        self.puzzle_output_dir = ""
+        self.puzzle_pdf_name = "testing_puzzle.pdf"
 
 
 class TestPuzzlePackager(unittest.TestCase):
@@ -20,11 +22,38 @@ class TestPuzzlePackager(unittest.TestCase):
 
     def get_test_puzzle(self):
         puzzle = Puzzle()
-        puzzle.puzzle_rows.append("1234567890123")
-        puzzle.puzzle_rows.append("1234567890123")
-        puzzle.puzzle_rows.append("1234567890123")
-        puzzle.puzzle_rows.append("1234567890123")
-        puzzle.puzzle_rows.append("1234567890123")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+
+        puzzle.puzzle_rows.append("ABCDEFGHIJKLM")
+
         return puzzle
 
     def test_puzzle_to_html(self):
@@ -33,6 +62,6 @@ class TestPuzzlePackager(unittest.TestCase):
         # print("-------------------------")
         # print(html)
         # print("-------------------------")
-        # packager.write_puzzle(self.puzzle)
+        packager.write_puzzle(self.puzzle)
 
         self.assertEqual(1, 1)

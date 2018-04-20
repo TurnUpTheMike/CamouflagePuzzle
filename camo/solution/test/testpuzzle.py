@@ -20,7 +20,6 @@ class TestPuzzleGenerator(unittest.TestCase):
     def setUp(self):
         self.properties = Properties()
         self.generator = PuzzleGeneratorA(self.properties)
-        # self.generator.create_letter_to_append =
 
     @parameterized.expand([
         (1, 0),

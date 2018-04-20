@@ -17,7 +17,7 @@ class TestWordBankGeneratorHardcoded(unittest.TestCase):
         word_bank = generator.generate_word_bank()
         self.assertIsInstance(word_bank, WordBank)
 
-    def test_generate_words_from_freebsd(self):
+    def utility_generate_words_from_freebsd(self):
         print("started test words")
         import requests
         words = requests.get(

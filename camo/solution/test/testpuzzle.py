@@ -10,11 +10,17 @@ class Properties:
         self.puzzle_row_length = 13
 
 
+class PuzzleGeneratorA(PuzzleGenerator):
+    def create_letter_to_append(self):
+        return 'A'
+
+
 class TestPuzzleGenerator(unittest.TestCase):
 
     def setUp(self):
-        properties = Properties()
-        self.generator = PuzzleGenerator(properties)
+        self.properties = Properties()
+        self.generator = PuzzleGeneratorA(self.properties)
+        # self.generator.create_letter_to_append =
 
     @parameterized.expand([
         (1, 0),
@@ -94,6 +100,7 @@ class TestPuzzleGenerator(unittest.TestCase):
         self.assertEqual(expected, actual, "letter_index = {} word_length = {}".format(letter_index, word_length))
 
     def test_create_letter_to_append(self):
+        self.generator = PuzzleGenerator(self.properties)
         random_letter_1 = self.generator.create_letter_to_append()
         random_letter_2 = self.generator.create_letter_to_append()
         random_letter_3 = self.generator.create_letter_to_append()

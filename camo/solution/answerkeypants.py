@@ -32,16 +32,23 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         print(word_prefix)
         print(word_suffix)
 
-        num_letters_on_side = self.properties.puzzle_row_length // 2
+        num_letters_on_left_side = self.properties.puzzle_row_length // 2
         print("letters on side {}".format(num_letters_on_side))
 
         # words that end in the prefix
-        print("words that end in the prefix")
-        program = re.compile("[a-z]{{0,{}}}{}$".format(num_letters_on_side, word_prefix, word_suffix))
+        print("words that end in the prefix +1")
+        # program = re.compile(".*pl.")
+        program = re.compile("[a-z]{{0,{}}}{}.(?:$|d$|de$|de.*)".format(num_letters_on_side, word_prefix))
+        # program = re.compile("[a-z]{{0,{}}}{}$".format(num_letters_on_side, word_prefix, word_suffix))
 
+        found_words = []
         for word in wordbank.unique_words:
             if program.match(word):
-                print("Found matching word {}".format(word))
+                # print("Found matching word {}".format(word))
+                found_words.append(word)
+
+        found_words.sort()
+        print(found_words)
 
         # for start_letter in word:
         # prefix_length = 6 - letter_index - 1

@@ -7,6 +7,7 @@ from wordbank.wordbank import Discriminator
 from solution.answerkey import AnswerKey, AnswerKeyGenerator
 from solution.puzzle import Puzzle, PuzzleGenerator
 from packaging.puzzlepackager import PuzzleToPDF
+from solution.puzzleutility import PuzzleUtility
 
 
 class Camoflague:
@@ -121,11 +122,12 @@ class Camoflague:
         :param args: 
         :return: 
         """
+        util = PuzzleUtility(args)
 
         if args.answer_key_generator == 'azfirstitem':
-            return AnswerKeyGenerator(args)
+            return AnswerKeyGenerator(args, util)
 
-        return AnswerKeyGenerator(args)
+        return AnswerKeyGenerator(args, util)
 
     def get_puzzle_generator(self, args):
         """
@@ -133,11 +135,12 @@ class Camoflague:
         :param args: 
         :return: 
         """
+        util = PuzzleUtility(args)
 
         if args.puzzle_generator == 'randompadding':
-            return PuzzleGenerator(args)
+            return PuzzleGenerator(args, util)
 
-        return PuzzleGenerator(args)
+        return PuzzleGenerator(args, util)
 
     def get_puzzle_packager(self, args):
         """

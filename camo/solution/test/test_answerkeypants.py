@@ -19,13 +19,13 @@ class TestAnswerKeyPants(unittest.TestCase):
         chosen_word = 'abcde'
 
         wordbank = WordBank(self.properties)
-        # test that these suffixes match the chosen prefix
+        # test that these suffixes match
         wordbank.unique_words.add("zzabz")
         wordbank.unique_words.add("zabzd")
         wordbank.unique_words.add("abzde")
         wordbank.unique_words.add("abzdez")
 
-        # test that these suffixes do not match the chosen prefix
+        # test that these suffixes do not match
         wordbank.unique_words.add("zzabzy")
         wordbank.unique_words.add("zabzdy")
         wordbank.unique_words.add("zzayz")
@@ -39,6 +39,16 @@ class TestAnswerKeyPants(unittest.TestCase):
 
         # prefix is too long
         wordbank.unique_words.add("yzzzzzzabz")
+
+        # test that these prefixes match the chosen suffix
+        wordbank.unique_words.add("zdezz")
+        wordbank.unique_words.add("bzdez")
+        wordbank.unique_words.add("zabzde")
+
+        # test that these prefixes do not match
+        wordbank.unique_words.add("yzdez")
+        wordbank.unique_words.add("ybzde")
+        wordbank.unique_words.add("ayzde")
 
         self.generator.choose_word(chosen_letter, chosen_word, wordbank)
 

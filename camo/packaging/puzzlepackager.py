@@ -1,6 +1,7 @@
 from jinja2 import Environment, FileSystemLoader
 import os
 import pdfkit
+from solution.puzzle import Puzzle
 
 
 class PuzzlePackager:
@@ -32,3 +33,13 @@ class PuzzlePackager:
 class PuzzleToPDF(PuzzlePackager):
     def write_puzzle(self, puzzle):
         print("Creating PDF")
+
+
+class SolutionPackager:
+    def __init__(self, properties, utility):
+        self.properties = properties
+        self.util = utility
+
+    def write_solution(self, puzzle, solution):
+        for row in puzzle.puzzle_rows:
+            print(row)

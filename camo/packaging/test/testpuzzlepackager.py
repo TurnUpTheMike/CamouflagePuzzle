@@ -1,7 +1,9 @@
 import unittest
 import os
-from packaging.puzzlepackager import PuzzlePackager
+from packaging.puzzlepackager import PuzzlePackager, SolutionPackager
 from solution.puzzle import Puzzle
+from solution.answerkey import AnswerKey
+from solution.puzzleutility import PuzzleUtility
 
 
 class Properties:
@@ -65,3 +67,75 @@ class TestPuzzlePackager(unittest.TestCase):
         packager.write_puzzle(self.puzzle)
 
         self.assertEqual(1, 1)
+
+
+class TestSolutionPackager(unittest.TestCase):
+    def setUp(self):
+        self.properties = Properties()
+        self.utility = PuzzleUtility(self.properties)
+        self.packager = SolutionPackager(self.properties, self.utility)
+
+    def test_write_solution(self):
+        puzzle = Puzzle()
+        puzzle.puzzle_rows.append("ABCPRACTICELM")
+        puzzle.puzzle_rows.append("ABCDEFBUBBLEM")
+        puzzle.puzzle_rows.append("ABCCANDLEJKLM")
+        puzzle.puzzle_rows.append("ABCDEBANANALM")
+
+        answerkey = AnswerKey()
+        answerkey.answers['a'] = 'banana'
+        answerkey.answers['b'] = 'bubble'
+        answerkey.answers['c'] = 'practice'
+        answerkey.answers['d'] = 'candle'
+
+        self.packager.write_solution(puzzle, solution)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

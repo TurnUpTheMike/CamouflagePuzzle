@@ -6,11 +6,13 @@
     <title>Camouflage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {
+body {
     font-family: sans-serif;
     font-size: 36pt;
     line-height: 50pt;
     margin: 12.7mm;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 h1 {
@@ -20,6 +22,7 @@ h1 {
 
 p {
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 .puzzle__header {
@@ -32,10 +35,12 @@ p {
 }
 
 .puzzle__header .puzzle__header--title .title {
-    padding: 80pt 15pt;
+    padding:45pt 15pt;
     background: orange;
     color: white;
-    font-size: 140pt;
+    font-size: 95pt;
+    font-variant: small-caps;
+    font-weight: bold;
 }
 
 .puzzle__header .puzzle__header--title .icon {
@@ -59,7 +64,7 @@ p {
 }
 
 .puzzle__header .puzzle__header--content {
-    padding: 15px;
+    padding: 35px;
 }
 
 .legend {
@@ -76,22 +81,18 @@ p {
 }
 
 .grid-container {
-    width: 60%;
     margin: 0 auto;
-    border: 5px solid black;
+    border: 10px solid black;
 }
 
 .grid-container .cell {
     text-align: center;
     background: #fff;
-    padding: 30px 0;
     border: 2px solid black;
     vertical-align: middle;
-    width: 50px;
-    height: -webkit-calc(60px - 1em);
-    height: -moz-calc(60px - 1em);
-    height: calc(60px - 1em);
-    font-size: 80pt;
+    width: 134px !important;
+    height: 126px !important;
+    font-size: 72pt;
     text-transform: uppercase;
 }
 
@@ -102,8 +103,9 @@ p {
 }
 
 .grid-container .cell:nth-child(13n + 7) {
-    border-right-width: 5px;
-    border-left-width: 5px;
+    border-right-width: 10px;
+    border-left-width: 10px;
+    color: white;
 }
 
     </style>
@@ -111,7 +113,7 @@ p {
 <body>
     <div class="puzzle__header">
         <div class="puzzle__header--title">
-            <h1 class="title">Camouflage00</h1>
+            <h1 class="title">Camouflage</h1>
             <span class="subline">From the games library.</span>
         </div> <!-- /title-->
         <div class="puzzle__header--content">

@@ -5,6 +5,7 @@ from wordbank.flatfilesgenerator import WordBankGeneratorFlatFiles
 from wordbank.alangenerator import WordBankGeneratorAlan
 from wordbank.wordbank import Discriminator
 from solution.answerkey import AnswerKey, AnswerKeyGenerator
+from solution.answerkeypants import AnswerKeyGeneratorPants
 from solution.puzzle import Puzzle, PuzzleGenerator
 from packaging.puzzlepackager import PuzzleToPDF
 from solution.puzzleutility import PuzzleUtility
@@ -16,7 +17,7 @@ class Camoflague:
     MIN_WORD_LENGTH = 5
     MAX_WORD_LENGTH = 10
     PUZZLE_ROW_LENGTH = 13
-    DEFAULT_WORD_BANK_GENERATOR = 'hardcoded'
+    DEFAULT_WORD_BANK_GENERATOR = 'flatfiles'
     DEFAULT_ANSWER_KEY_GENERATOR = 'azfirstitem'
     DEFAULT_PUZZLE_GENERATOR = 'randompadding'
     DEFAULT_PUZZLE_PACKAGER = 'pdf'
@@ -33,7 +34,8 @@ class Camoflague:
 
         wordbank_generator = self.get_wordbank_generator(args)
         wordbank = wordbank_generator.generate_word_bank()
-        wordbank.print_wordbank()
+        if args.display_wordbank:
+            wordbank.print_wordbank()
 
         answerkey_generator = self.get_answerkey_generator(args)
         answerkey = answerkey_generator.generate_answer_key(wordbank)
@@ -64,7 +66,7 @@ class Camoflague:
                             help="options: hardcoded | flatfiles | alan",
                             default=Camoflague.DEFAULT_WORD_BANK_GENERATOR)
         parser.add_argument('--answerkey-generator', dest="answer_key_generator", type=str,
-                            help="options: azfirstitem",
+                            help="options: azfirstitem | pants",
                             default=Camoflague.DEFAULT_ANSWER_KEY_GENERATOR)
         parser.add_argument('--puzzle-generator', dest="puzzle_generator", type=str,
                             help="options: azfirstitem",
@@ -95,6 +97,8 @@ class Camoflague:
         # Debug Flags
         parser.add_argument('--do-package-puzzle', action='store_true',
                             help="Will create a pdf of the puzzle")
+        parser.add_argument('--display-wordbank', action='store_true',
+                            help="Whether to print the wordbank to the console")
 
         arguments = parser.parse_args()
         return arguments
@@ -126,6 +130,8 @@ class Camoflague:
 
         if args.answer_key_generator == 'azfirstitem':
             return AnswerKeyGenerator(args, util)
+        elif args.answer_key_generator == 'pants':
+            return AnswerKeyGeneratorPants(args, util)
 
         return AnswerKeyGenerator(args, util)
 

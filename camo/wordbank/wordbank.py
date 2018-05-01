@@ -51,6 +51,11 @@ class WordBank:
             print("{}: {}".format(letter, self.hash_by_letter[letter]))
         print("--------------------------------------")
 
+    def print_letterbank(self, letter):
+        print("------------{}-----------".format(self.__class__.__name__))
+        print("{}: {}".format(letter, self.hash_by_letter[letter]))
+        print("--------------------------------------")
+
 
 class WordBankAlan():
     def __init__(self, discriminator, puzzle_line_length):

@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 from parameterized import parameterized
 from solution.puzzle import PuzzleGenerator
 from solution.puzzleutility import PuzzleUtility
@@ -11,17 +12,12 @@ class Properties:
         self.puzzle_row_length = 13
 
 
-class PuzzleGeneratorA(PuzzleGenerator):
-    def create_letter_to_append(self):
-        return 'A'
-
-
 class TestPuzzleGenerator(unittest.TestCase):
 
     def setUp(self):
         self.properties = Properties()
         self.utility = PuzzleUtility(self.properties)
-        self.generator = PuzzleGeneratorA(self.properties, self.utility)
+        self.generator = PuzzleGenerator(self.properties, self.utility)
 
     @parameterized.expand([
         (0, "AAAAAA"),
@@ -33,8 +29,10 @@ class TestPuzzleGenerator(unittest.TestCase):
         (6, "")
     ])
     def test_create_left_padding(self, letter_index, expected):
-        actual = self.generator.create_left_padding(letter_index)
-        self.assertEqual(expected, actual)
+        with patch.object(self.generator, 'create_letter_to_append') as mock_generator:
+            mock_generator.return_value = 'A'
+            actual = self.generator.create_left_padding(letter_index)
+            self.assertEqual(expected, actual)
 
     @parameterized.expand([
         (6, 13, ""),
@@ -78,8 +76,10 @@ class TestPuzzleGenerator(unittest.TestCase):
         (0, 5, "AA"),
     ])
     def test_create_right_padding(self, letter_index, word_length, expected):
-        actual = self.generator.create_right_padding(letter_index, word_length)
-        self.assertEqual(expected, actual, "letter_index = {} word_length = {}".format(letter_index, word_length))
+        with patch.object(self.generator, 'create_letter_to_append') as mock_generator:
+            mock_generator.return_value = 'A'
+            actual = self.generator.create_right_padding(letter_index, word_length)
+            self.assertEqual(expected, actual, "letter_index = {} word_length = {}".format(letter_index, word_length))
 
     def test_create_letter_to_append(self):
         self.generator = PuzzleGenerator(self.properties, self.utility)

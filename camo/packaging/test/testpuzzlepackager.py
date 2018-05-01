@@ -56,7 +56,7 @@ class TestPuzzlePackager(unittest.TestCase):
 
         return puzzle
 
-    def test_puzzle_to_html(self):
+    def xtest_puzzle_to_html(self):
         packager = PuzzlePackager(properties=self.properties)
         html = packager.puzzle_to_html(self.puzzle)
         # print("-------------------------")

@@ -1,6 +1,7 @@
 import unittest
 from wordbank.wordbank import WordBank
 from solution.answerkeypants import AnswerKeyGeneratorPants
+from solution.puzzleutility import PuzzleUtility
 
 
 class Properties:
@@ -12,7 +13,8 @@ class TestAnswerKeyPants(unittest.TestCase):
 
     def setUp(self):
         self.properties = Properties()
-        self.generator = AnswerKeyGeneratorPants(self.properties)
+        self.utility = PuzzleUtility(self.properties)
+        self.generator = AnswerKeyGeneratorPants(self.properties, self.utility)
 
     def test_choose_word(self):
         chosen_letter = 'c'

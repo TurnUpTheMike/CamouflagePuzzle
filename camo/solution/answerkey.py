@@ -12,8 +12,9 @@ class AnswerKey:
 
 
 class AnswerKeyGenerator:
-    def __init__(self, properties):
+    def __init__(self, properties, utility):
         self.properties = properties
+        self.util = utility
 
     def generate_answer_key(self, wordbank):
         answerkey = AnswerKey()

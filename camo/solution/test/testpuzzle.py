@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch
 from parameterized import parameterized
 from solution.puzzle import PuzzleGenerator
+from solution.puzzleutility import PuzzleUtility
 
 
 class Properties:
@@ -15,26 +16,8 @@ class TestPuzzleGenerator(unittest.TestCase):
 
     def setUp(self):
         self.properties = Properties()
-        self.generator = PuzzleGenerator(self.properties)
-
-    @parameterized.expand([
-        (1, 0),
-        (2, 0),
-        (3, 0),
-        (4, 0),
-        (5, 0),
-        (6, 0),
-        (7, 0),
-        (8, 1),
-        (9, 2),
-        (10, 3),
-        (11, 4),
-        (12, 5),
-        (13, 6)
-    ])
-    def test_earliest_letter_index(self, word_length, expected):
-        index = self.generator.earliest_letter_index(word_length)
-        self.assertEqual(expected, index)
+        self.utility = PuzzleUtility(self.properties)
+        self.generator = PuzzleGenerator(self.properties, self.utility)
 
     @parameterized.expand([
         (0, "AAAAAA"),
@@ -99,6 +82,7 @@ class TestPuzzleGenerator(unittest.TestCase):
             self.assertEqual(expected, actual, "letter_index = {} word_length = {}".format(letter_index, word_length))
 
     def test_create_letter_to_append(self):
+        self.generator = PuzzleGenerator(self.properties, self.utility)
         random_letter_1 = self.generator.create_letter_to_append()
         random_letter_2 = self.generator.create_letter_to_append()
         random_letter_3 = self.generator.create_letter_to_append()

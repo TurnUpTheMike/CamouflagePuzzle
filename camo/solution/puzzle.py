@@ -1,5 +1,6 @@
 import string
 import random
+from solution.puzzleutility import PuzzleUtility
 
 
 class Puzzle:
@@ -14,9 +15,9 @@ class Puzzle:
 
 
 class PuzzleGenerator:
-    def __init__(self, properties):
+    def __init__(self, properties, utility):
         self.properties = properties
-        self.chosen_letter_index = properties.puzzle_row_length // 2
+        self.util = utility
 
     def generate_puzzle(self, answerkey):
         puzzle = Puzzle()
@@ -33,8 +34,7 @@ class PuzzleGenerator:
 
     def create_puzzle_row(self, letter, word):
         word_length = len(word)
-        earliest_index = self.earliest_letter_index(word_length)
-        letter_index = word.find(letter, earliest_index)
+        letter_index = self.util.letter_ndx_of_word(word, letter)
 
         left_padding = self.create_left_padding(letter_index)
         right_padding = self.create_right_padding(letter_index, word_length)
@@ -43,21 +43,15 @@ class PuzzleGenerator:
         row_text = ''.join(puzzle_pieces)
         return row_text.upper()
 
-    def earliest_letter_index(self, word_length):
-        if self.chosen_letter_index > word_length - 1:
-            return 0
-
-        return (word_length - 1) - self.chosen_letter_index
-
     def create_left_padding(self, letter_index):
-        padding_length = self.chosen_letter_index - letter_index
+        padding_length = self.util.chosen_letter_index - letter_index
         if padding_length <= 0:
             return ''
 
         return self.create_padding_text_of_length(padding_length)
 
     def create_right_padding(self, letter_index, word_length):
-        padding_length = self.chosen_letter_index - (word_length - 1 - letter_index)
+        padding_length = self.util.chosen_letter_index - (word_length - 1 - letter_index)
         if padding_length <= 0:
             return ''
 

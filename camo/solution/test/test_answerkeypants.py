@@ -2,6 +2,7 @@ import unittest
 from wordbank.wordbank import WordBank
 from solution.answerkeypants import AnswerKeyGeneratorPants
 from solution.puzzleutility import PuzzleUtility
+from parameterized import parameterized
 
 
 class Properties:
@@ -15,6 +16,15 @@ class TestAnswerKeyPants(unittest.TestCase):
         self.properties = Properties()
         self.utility = PuzzleUtility(self.properties)
         self.generator = AnswerKeyGeneratorPants(self.properties, self.utility)
+
+    @parameterized.expand([
+        ('e', "[a-df-z]"),
+        ('a', "[b-z]"),
+        ('z', "[a-y]"),
+    ])
+    def test_generate_not_letter_expression(self, letter, expected_expression):
+        actual_expression = self.generator.generate_not_letter_expression(letter)
+        self.assertEqual(expected_expression, actual_expression)
 
     def xtest_choose_word(self):
         chosen_letter = 'c'

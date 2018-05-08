@@ -71,8 +71,12 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         #     if program.match(word):
         #         print("Found matching word {}".format(word))
 
-    # example generate_prefix_expression('ab') yields ab|^b
     def generate_prefix_expression(self, prefix):
+        """
+        example generate_prefix_expression('ab') yields ab|^b
+        :param prefix: 
+        :return: 
+        """
         list_prefixes = [prefix]
 
         for index in range(1, len(prefix)):
@@ -90,6 +94,25 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
 
         return ''.join(list_suffixes)
 
+    def generate_not_letter_expression(self, letter):
+        """
+        Generate a regex expression for a single letter that doesn't contain 'letter'
+        example letter = e yeilds [a-df-z]
+        assumes letter will be in the range of [a-z]
+        :param letter: 
+        :return: 
+        """
+        prefix_expression = ""
+        if letter != 'a':
+            letter_before = chr(ord(letter) - 1)
+            prefix_expression = "a-{}".format(letter_before)
+
+        suffix_expression = ""
+        if letter != 'z':
+            letter_after = chr(ord(letter) + 1)
+            suffix_expression = "{}-z".format(letter_after)
+
+        return "[{}{}]".format(prefix_expression, suffix_expression)
 
 
 

@@ -2,6 +2,9 @@ from jinja2 import Environment, FileSystemLoader
 import os
 import pdfkit
 from solution.puzzle import Puzzle
+from solution.puzzleutility import PuzzleUtility
+import datetime
+import time
 
 
 class PuzzlePackager:
@@ -30,16 +33,84 @@ class PuzzlePackager:
         return puzzle_html
 
 
-class PuzzleToPDF(PuzzlePackager):
-    def write_puzzle(self, puzzle):
-        print("Creating PDF")
-
-
 class SolutionPackager:
     def __init__(self, properties, utility):
         self.properties = properties
         self.util = utility
 
-    def write_solution(self, puzzle, solution):
+    def puzzle_to_string(self, puzzle, answerkey):
+        output_array = []
         for row in puzzle.puzzle_rows:
-            print(row)
+            letter = row[self.util.chosen_letter_index]
+            word = answerkey.answers[letter.lower()]
+            output_array.append(word.upper())
+            output_array.append(os.linesep)
+
+        return ''.join(output_array)
+
+    def get_answerkey_filename(self):
+        filename = self.properties.answerkey_txt_name
+        if '{}' in filename:
+            timestamp = time.time()
+            formatted_timestamp = datetime.datetime.fromtimestamp(timestamp).strftime('%Y%m%d%H%M%S')
+            filename = filename.format(formatted_timestamp)
+
+        return os.path.join(self.properties.dir_of_answer_keys, filename)
+
+    def write_solution(self, puzzle, answerkey):
+        output_name = self.get_answerkey_filename()
+
+        file = open(output_name, "w")
+        file.write(self.puzzle_to_string(puzzle, answerkey))
+        file.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

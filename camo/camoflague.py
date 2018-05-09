@@ -7,7 +7,7 @@ from wordbank.wordbank import Discriminator
 from solution.answerkey import AnswerKey, AnswerKeyGenerator
 from solution.answerkeypants import AnswerKeyGeneratorPants
 from solution.puzzle import Puzzle, PuzzleGenerator
-from packaging.puzzlepackager import PuzzleToPDF
+from packaging.puzzlepackager import PuzzlePackager, SolutionPackager
 from solution.puzzleutility import PuzzleUtility
 
 
@@ -21,9 +21,11 @@ class Camoflague:
     DEFAULT_ANSWER_KEY_GENERATOR = 'azfirstitem'
     DEFAULT_PUZZLE_GENERATOR = 'randompadding'
     DEFAULT_PUZZLE_PACKAGER = 'pdf'
+    DEFAULT_SOLUTION_PACKAGER = 'txt'
     PUZZLE_TEMPLATE = "/packaging/puzzle_template.html"
     DEFAULT_PUZZLE_OUTPUT_DIR = ""  # current working director
     PUZZLE_PDF_NAME = "testing_puzzle.pdf"
+    ANSWERKEY_TXT_NAME = "answerkey_{}.txt"
 
     def run(self):
         args = self.create_argument_parser()
@@ -45,8 +47,14 @@ class Camoflague:
         puzzle = puzzle_generator.generate_puzzle(answerkey)
         puzzle.print_puzzle()
 
-        packaging_service = self.get_puzzle_packager(args)
-        packaging_service.write_puzzle(puzzle)
+        if args.do_package_puzzle:
+            print("Packaging Puzzle artifacts")
+            solution_packager = self.get_solution_packager(args)
+            solution_packager.write_solution(puzzle, answerkey)
+            packaging_service = self.get_puzzle_packager(args)
+            packaging_service.write_puzzle(puzzle)
+        else:
+            print("No artifacts created")
 
     def create_argument_parser(self):
         parser = argparse.ArgumentParser(description='Camoflauge Puzzle',
@@ -72,7 +80,10 @@ class Camoflague:
                             help="options: azfirstitem",
                             default=Camoflague.DEFAULT_PUZZLE_GENERATOR)
         parser.add_argument('--puzzle-packager', dest="puzzle_packager", type=str,
-                            help="options: azfirstitem",
+                            help="options: pdf",
+                            default=Camoflague.DEFAULT_PUZZLE_PACKAGER)
+        parser.add_argument('--solution-packager', dest="solution_packager", type=str,
+                            help="options: txt",
                             default=Camoflague.DEFAULT_PUZZLE_PACKAGER)
 
         # Input Sources
@@ -93,6 +104,9 @@ class Camoflague:
         parser.add_argument('--puzzle-pdf-name', dest='puzzle_pdf_name', type=str,
                             default=Camoflague.PUZZLE_PDF_NAME,
                             help="The name of the pdf to create")
+        parser.add_argument('--answerkey-txt-name', dest='answerkey_txt_name', type=str,
+                            default=Camoflague.ANSWERKEY_TXT_NAME,
+                            help="The name of the txt to create for the answerkey")
 
         # Debug Flags
         parser.add_argument('--do-package-puzzle', action='store_true',
@@ -155,9 +169,21 @@ class Camoflague:
         """
 
         if args.puzzle_packager == 'pdf':
-            return PuzzleToPDF(args)
+            return PuzzlePackager(args)
 
-        return PuzzleToPDF(args)
+        return PuzzlePackager(args)
+
+    def get_solution_packager(self, args):
+        """
+        A factory method to package the answerkey with
+        :return: 
+        """
+        util = PuzzleUtility(args)
+
+        if args.puzzle_packager == 'txt':
+            return SolutionPackager(args, util)
+
+        return SolutionPackager(args, util)
 
 if __name__ == '__main__':
     print("Starting Camoflauge Puzzle Creator")

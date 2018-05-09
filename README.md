@@ -104,3 +104,16 @@ python3 camoflague.py --bank-generator flatfiles
 Run Alan way
 python3 camoflague.py --bank-generator alan
 ```
+
+Packaging and Creating Artifacts
+```
+This flag will create a pdf and an answerkey txt
+python3 camoflague.py --do-package-puzzle
+
+The default answerkey filename is answerkey_{}.txt and a timestamp will be formatted into the filename
+You can override the output answerkey filename with
+python3 camoflague.py --do-package-puzzle --answerkey-txt-name favorite_puzzle_name.txt
+
+You can override the output puzzle pdf name with
+python3 camoflague.py --do-package-puzzle --puzzle-pdf-name favorite_puzzle.pdf
+```

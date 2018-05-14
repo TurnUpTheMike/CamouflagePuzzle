@@ -13,6 +13,7 @@ Structuring this work:
 
 Other:
 - [Running Tests](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#running-tests)
+- [Packaging Artifacts](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#packaging-and-creating-artifacts)
 
 ______________________________________________________________________
 Create a Word Bank
@@ -106,6 +107,7 @@ python3 camoflague.py --bank-generator alan
 ```
 
 Packaging and Creating Artifacts
+--------------------------------
 ```
 This flag will create a pdf and an answerkey txt
 python3 camoflague.py --do-package-puzzle

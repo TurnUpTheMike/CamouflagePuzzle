@@ -13,7 +13,7 @@ Structuring this work:
 
 Other:
 - [Running Tests](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#running-tests)
-- [Packaging Artifacts](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#packaging-and-creating-artifacts)
+- [Packaging and Creating Artifacts](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#packaging-and-creating-artifacts)
 
 ______________________________________________________________________
 Create a Word Bank

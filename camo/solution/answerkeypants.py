@@ -1,4 +1,5 @@
 from solution.answerkey import AnswerKeyGenerator, AnswerKey
+from solution.puzzleutility import PuzzleUtility
 import re
 
 
@@ -22,7 +23,35 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         return answerkey
 
     def choose_word(self, letter, word, wordbank):
-        letter_index = word.find(letter)
+        word_matches = self.get_words_that_almost_match(letter, word, wordbank)
+
+        if len(word_matches) == 0:
+            return word
+
+        # choose a word
+        detterent = word_matches.values()[0]
+
+        letter_index = self.util.letter_ndx_of_word(word, letter)
+        word_prefix = word[:letter_index]
+        word_suffix = word[letter_index + 1:]
+        prefix_group = deterrent.groups()[0]
+        suffix_group = detterent.groups()[2]
+
+        prefix_to_use = word_prefix
+        if prefix_group.find(word_prefix) > -1:
+            prefix_to_use = prefix_group
+
+        suffix_to_use = word_suffix
+        if suffix_group.find(word_suffix) > -1:
+            suffix_to_use = suffix_group
+
+        mashed_word = "{}{}{}".format(prefix_to_use, letter, suffix_to_use)
+
+        # mashup the word and the deterrent word
+        return mashed_word
+
+    def get_words_that_almost_match(self, letter, word, wordbank):
+        letter_index = self.util.letter_ndx_of_word(word, letter)
         word_prefix = word[:letter_index]
         word_suffix = word[letter_index + 1:]
 
@@ -37,39 +66,30 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         suffix_expression = self.generate_suffix_expression(word_suffix)
         print(suffix_expression)
 
-        num_letters_on_left_side = self.properties.puzzle_row_length // 2
-        num_letters_on_right_side = self.properties.puzzle_row_length // 2
+        word_length = len(word)
+        num_letters_on_left_side = self.util.chosen_letter_index - letter_index
+        num_letters_on_right_side = self.util.chosen_letter_index - (word_length - 1 - letter_index)
         print("letters on side {}".format(num_letters_on_left_side))
 
         # words that end in the prefix
         print("all the words that match")
-        # program = re.compile(".*pl.")
-        # program = re.compile(
-        # "(?:[a-z]{{0,{}}}ab|^ab|^b|^)[a-z](?:$|d$|de$|de[a-z]{{0,{}}})".format(
-        # num_letters_on_left_side, num_letters_on_right_side))
-
+        chosen_letter_expression = self.generate_not_letter_expression(letter)
         program = re.compile(
-            "(?:[a-z]{{0,{}}}{}|^)[a-z](?:$|{}[a-z]{{0,{}}})".format(num_letters_on_left_side,
-                                                                     prefix_expression,
-                                                                     suffix_expression,
-                                                                     num_letters_on_right_side))
+            "((?:[a-z]{{0,{}}}{}|^))({})((?:$|{}[a-z]{{0,{}}}))".format(num_letters_on_left_side,
+                                                                  prefix_expression,
+                                                                  chosen_letter_expression,
+                                                                  suffix_expression,
+                                                                  num_letters_on_right_side))
 
-        found_words = []
+        found_words = {}
         for word in wordbank.unique_words:
-            if program.match(word):
-                # print("Found matching word {}".format(word))
-                found_words.append(word)
+            match_obj = program.match(word)
+            if match_obj:
+                print("Found matching word {}".format(word))
+                print(match_obj.groups())
+                found_words[word] = match_obj
 
-        found_words.sort()
-        print(found_words)
-
-        # for start_letter in word:
-        # prefix_length = 6 - letter_index - 1
-        # suffix_length = 6
-        # program = re.compile("[a-z]{{0,{}}}{}.{}.*".format(prefix_length, word_prefix, word_suffix))
-        # for word in wordbank.unique_words:
-        #     if program.match(word):
-        #         print("Found matching word {}".format(word))
+        return found_words
 
     def generate_prefix_expression(self, prefix):
         """
@@ -86,13 +106,15 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         return ''.join(list_prefixes)
 
     def generate_suffix_expression(self, suffix):
-        list_suffixes = [suffix]
+        list_suffixes = []
 
         for index in range(1, len(suffix)):
-            expr = "{}{}{}".format('|', suffix[:index], '$')
+            expr = "{}{}".format(suffix[:index], '$')
             list_suffixes.append(expr)
 
-        return ''.join(list_suffixes)
+        list_suffixes.append(suffix)
+
+        return '|'.join(list_suffixes)
 
     def generate_not_letter_expression(self, letter):
         """

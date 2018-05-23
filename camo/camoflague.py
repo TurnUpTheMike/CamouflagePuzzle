@@ -77,7 +77,7 @@ class Camoflague:
                             help="options: azfirstitem | pants",
                             default=Camoflague.DEFAULT_ANSWER_KEY_GENERATOR)
         parser.add_argument('--puzzle-generator', dest="puzzle_generator", type=str,
-                            help="options: azfirstitem",
+                            help="options: randompadding",
                             default=Camoflague.DEFAULT_PUZZLE_GENERATOR)
         parser.add_argument('--puzzle-packager', dest="puzzle_packager", type=str,
                             help="options: pdf",

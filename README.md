@@ -20,6 +20,11 @@ ______________________________________________________________________
 The Coding Competition
 ----------------------
 
+The Rules of the Puzzle:
+
+Place each of the 26 letters of the alphabet once in the grid below to form a common word of <i>five or more letters</i> reading across in each line. Not all the letters in each line will be used; it's up to you to determine which ones are needed. Some letters may fit in more than one of the empty squares to form familiar words; however, only one arrangment of all of the letters of the alphabet will complete a word in each row. Hyphenated words, proper nouns, and plurals are not used.
+
+
 When: May 23rd - June 6th
 This coding competition will be announced on May 23rd.  I'll accept submissions for the competition until June 6th.
 

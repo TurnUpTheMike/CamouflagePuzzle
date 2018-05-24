@@ -37,7 +37,7 @@ What are we doing / How do you win: The goal is to consistently create challengi
 
 How is the winner determined: Myself and other judges will attempt to solve puzzles from each of the submissions.  If you would like to be a judge, please send me an email at michael.pantaleano@wpengine.com.
 
-The Prize: The winning submission will be awarded a one-year subscription to GAMES magazine.  I'm estimating that the judges can come to a conclusion in a two week period.  I will attempt to announce and contact the winner on June 6th.
+The Prize: The winning submission will be awarded a one-year subscription to GAMES magazine.  I'm estimating that the judges can come to a conclusion in a two week period.  I will attempt to announce and contact the winner on June 20th.
 
 ______________________________________________________________________
 Create a Word Bank

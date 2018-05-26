@@ -15,12 +15,19 @@ class AnswerKeyPants(AnswerKey):
             print("{}: {}".format(letter, self.answers_unmodified[letter]))
         print("--------------------------------------")
 
+    def get_answer_for_letter(self, letter):
+        return self.answers_unmodified[letter]
+
 
 class AnswerKeyGeneratorPants(AnswerKeyGenerator):
     def __init__(self, properties, utility):
         super().__init__(properties, utility)
         self.flag_verbose = False
         self.flag_match_counts = True
+        self.banned_hash = {i: [i] for i in "abcdefghijklmnopqrstuvwxyz"}
+        self.letter_list = []
+        for letter in "abcdefghijklmnopqrstuvwxyz":
+            self.letter_list.append(letter)
 
     def log(self, message):
         if self.flag_verbose:
@@ -46,18 +53,40 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
 
     def choose_word(self, letter, word, wordbank):
         word_matches = self.get_words_that_almost_match(letter, word, wordbank)
+        self.log("Chosen ({}) {} had {} matches".format(letter, word, len(word_matches)))
+        self.log_matches("Chosen ({}) {} had {} matches".format(letter, word, len(word_matches)))
 
         if len(word_matches) == 0:
             return word
 
         # choose a word
-        self.log("Chosen ({}) {} had {} matches".format(letter, word, len(word_matches)))
-        self.log_matches("Chosen ({}) {} had {} matches".format(letter, word, len(word_matches)))
-        match_values = list(word_matches.values())
-        random_index = random.randint(0, len(match_values) - 1)
-        deterrent = match_values[random_index]
+        deterrent = self.choose_deterrent_word(word_matches)
 
         # combine the deterrent with the chosen word
+        mashed_word = self.create_mashed_word(letter, word, deterrent)
+
+        # add the chosen-letter-banned-list to the banned list of deterrent's letter to prevent cycles
+        self.add_to_banned_list(deterrent, letter)
+
+        # mashup the word and the deterrent word
+        return mashed_word
+
+    def add_to_banned_list(self, deterrent, letter):
+        self.log(deterrent.re)
+        deterrent_letter = deterrent.groups()[1]
+        chosen_letter_banned_list = self.banned_hash[letter]
+        for banned_letter in chosen_letter_banned_list:
+            self.banned_hash[deterrent_letter].append(banned_letter)
+            self.log("adding {} to bucket {}".format(banned_letter, deterrent_letter))
+
+    def create_mashed_word(self, letter, word, deterrent):
+        """
+        combine the word and the deterrent together
+        :param letter: 
+        :param word: 
+        :param deterrent: 
+        :return: string
+        """
         letter_index = self.util.letter_ndx_of_word(word, letter)
         word_prefix = word[:letter_index]
         word_suffix = word[letter_index + 1:]
@@ -73,16 +102,31 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
             suffix_to_use = suffix_group
 
         mashed_word = "{}{}{}".format(prefix_to_use, letter, suffix_to_use)
-
-        # mashup the word and the deterrent word
         return mashed_word
 
+    def choose_deterrent_word(self, word_matches):
+        """
+        
+        :param word_matches: dictionary of "word": re.match object
+        :return: re.match object
+        """
+        match_values = list(word_matches.values())
+        random_index = random.randint(0, len(match_values) - 1)
+        deterrent = match_values[random_index]
+        return deterrent
+
     def get_words_that_almost_match(self, letter, word, wordbank):
+        """
+        Search for word that almost match our <word> to pad the puzzle with
+        
+        :param letter: the chosen letter of the word
+        :param word: the chosen word
+        :param wordbank: the wordbank to search in
+        :return: a dictionary of  "word": re.match object
+        """
         letter_index = self.util.letter_ndx_of_word(word, letter)
         word_prefix = word[:letter_index]
         word_suffix = word[letter_index + 1:]
-
-        # wordbank.print_letterbank(letter)
 
         self.log("GetWordsThatAlmostMatch {} for the letter {} ".format(word, letter))
         # self.log(word_prefix)
@@ -132,6 +176,11 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         return ''.join(list_prefixes)
 
     def generate_suffix_expression(self, suffix):
+        """
+        example generate_suffix_expression("de" yields d$|de
+        :param suffix: 
+        :return: 
+        """
         list_suffixes = []
 
         for index in range(1, len(suffix)):
@@ -150,17 +199,12 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         :param letter: 
         :return: 
         """
-        prefix_expression = ""
-        if letter != 'a':
-            letter_before = chr(ord(letter) - 1)
-            prefix_expression = "a-{}".format(letter_before)
 
-        suffix_expression = ""
-        if letter != 'z':
-            letter_after = chr(ord(letter) + 1)
-            suffix_expression = "{}-z".format(letter_after)
+        banned_list = self.banned_hash[letter]
+        acceptable_letters = [n for n in self.letter_list if n not in banned_list]
+        expression = ''.join(acceptable_letters)
+        return "[{}]".format(expression)
 
-        return "[{}{}]".format(prefix_expression, suffix_expression)
 
 
 

@@ -11,7 +11,7 @@ from packaging.puzzlepackager import PuzzlePackager, SolutionPackager
 from solution.puzzleutility import PuzzleUtility
 
 
-class Camoflague:
+class Camouflage:
     DEFAULT_DIR_ANSWER_KEYS = "/out/answer_keys"
     DEFAULT_DIR_WORD_BANK_SRCS = "/lib/word_bank_src"
     MIN_WORD_LENGTH = 5
@@ -63,49 +63,49 @@ class Camoflague:
 
         # Puzzle Characteristics
         parser.add_argument('--min-word-length', dest='min_word_length', type=bool,
-                            default=Camoflague.MIN_WORD_LENGTH)
+                            default=Camouflage.MIN_WORD_LENGTH)
         parser.add_argument('--max-word-length', dest='max_word_length',
-                            default=Camoflague.MAX_WORD_LENGTH)
+                            default=Camouflage.MAX_WORD_LENGTH)
         parser.add_argument('--puzzle-row-length', dest='puzzle_row_length',
-                            default=Camoflague.PUZZLE_ROW_LENGTH)
+                            default=Camouflage.PUZZLE_ROW_LENGTH)
 
         # Generator choices
         parser.add_argument('--bank-generator', dest="bank_generator", type=str,
                             help="options: hardcoded | flatfiles | alan",
-                            default=Camoflague.DEFAULT_WORD_BANK_GENERATOR)
+                            default=Camouflage.DEFAULT_WORD_BANK_GENERATOR)
         parser.add_argument('--answerkey-generator', dest="answer_key_generator", type=str,
                             help="options: azfirstitem | pants",
-                            default=Camoflague.DEFAULT_ANSWER_KEY_GENERATOR)
+                            default=Camouflage.DEFAULT_ANSWER_KEY_GENERATOR)
         parser.add_argument('--puzzle-generator', dest="puzzle_generator", type=str,
-                            help="options: azfirstitem",
-                            default=Camoflague.DEFAULT_PUZZLE_GENERATOR)
+                            help="options: randompadding",
+                            default=Camouflage.DEFAULT_PUZZLE_GENERATOR)
         parser.add_argument('--puzzle-packager', dest="puzzle_packager", type=str,
                             help="options: pdf",
-                            default=Camoflague.DEFAULT_PUZZLE_PACKAGER)
+                            default=Camouflage.DEFAULT_PUZZLE_PACKAGER)
         parser.add_argument('--solution-packager', dest="solution_packager", type=str,
                             help="options: txt",
-                            default=Camoflague.DEFAULT_PUZZLE_PACKAGER)
+                            default=Camouflage.DEFAULT_PUZZLE_PACKAGER)
 
         # Input Sources
         parser.add_argument('--dir-answer-keys', dest='dir_of_answer_keys', type=str,
-                            default=cwd + Camoflague.DEFAULT_DIR_ANSWER_KEYS,
+                            default=cwd + Camouflage.DEFAULT_DIR_ANSWER_KEYS,
                             help="The directory where answer keys are written to")
         parser.add_argument('--dir-word-bank', dest='dir_of_word_bank_src', type=str,
-                            default=cwd + Camoflague.DEFAULT_DIR_WORD_BANK_SRCS,
+                            default=cwd + Camouflage.DEFAULT_DIR_WORD_BANK_SRCS,
                             help="A directory where word bank text sources are read from")
         parser.add_argument('--puzzle-template', dest='puzzle_template', type=str,
-                            default=cwd + Camoflague.PUZZLE_TEMPLATE,
+                            default=cwd + Camouflage.PUZZLE_TEMPLATE,
                             help="The html file that is a template for the puzzle output")
 
         # Output Sources
         parser.add_argument('--puzzle-output-dir', dest='puzzle_output_dir', type=str,
-                            default=Camoflague.DEFAULT_PUZZLE_OUTPUT_DIR,
+                            default=Camouflage.DEFAULT_PUZZLE_OUTPUT_DIR,
                             help="The directory to write the pdf puzzle to")
         parser.add_argument('--puzzle-pdf-name', dest='puzzle_pdf_name', type=str,
-                            default=Camoflague.PUZZLE_PDF_NAME,
+                            default=Camouflage.PUZZLE_PDF_NAME,
                             help="The name of the pdf to create")
         parser.add_argument('--answerkey-txt-name', dest='answerkey_txt_name', type=str,
-                            default=Camoflague.ANSWERKEY_TXT_NAME,
+                            default=Camouflage.ANSWERKEY_TXT_NAME,
                             help="The name of the txt to create for the answerkey")
 
         # Debug Flags
@@ -137,8 +137,8 @@ class Camoflague:
     def get_answerkey_generator(self, args):
         """
         A factory method to create an instance of an AnswerKeyGenerator
-        :param args: 
-        :return: 
+        :param args:
+        :return:
         """
         util = PuzzleUtility(args)
 
@@ -152,8 +152,8 @@ class Camoflague:
     def get_puzzle_generator(self, args):
         """
         A factory method to create an instance of a PuzzleGenerator
-        :param args: 
-        :return: 
+        :param args:
+        :return:
         """
         util = PuzzleUtility(args)
 
@@ -165,7 +165,7 @@ class Camoflague:
     def get_puzzle_packager(self, args):
         """
         A factory method to package the puzzle with
-        :return: 
+        :return:
         """
 
         if args.puzzle_packager == 'pdf':
@@ -176,7 +176,7 @@ class Camoflague:
     def get_solution_packager(self, args):
         """
         A factory method to package the answerkey with
-        :return: 
+        :return:
         """
         util = PuzzleUtility(args)
 
@@ -188,7 +188,7 @@ class Camoflague:
 if __name__ == '__main__':
     print("Starting Camoflauge Puzzle Creator")
 
-    camoflague = Camoflague()
-    camoflague.run()
+    camouflage = Camouflage()
+    camouflage.run()
 
     print("El Fin")

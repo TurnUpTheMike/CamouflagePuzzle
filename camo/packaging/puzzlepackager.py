@@ -42,7 +42,7 @@ class SolutionPackager:
         output_array = []
         for row in puzzle.puzzle_rows:
             letter = row[self.util.chosen_letter_index]
-            word = answerkey.answers[letter.lower()]
+            word = answerkey.get_answer_for_letter(letter.lower())
             output_array.append(word.upper())
             output_array.append(os.linesep)
 

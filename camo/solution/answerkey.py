@@ -10,6 +10,9 @@ class AnswerKey:
             print("{}: {}".format(letter, self.answers[letter]))
         print("--------------------------------------")
 
+    def get_answer_for_letter(self, letter):
+        return self.answers[letter]
+
 
 class AnswerKeyGenerator:
     def __init__(self, properties, utility):

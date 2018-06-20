@@ -23,8 +23,8 @@ class Camouflage:
     DEFAULT_PUZZLE_PACKAGER = 'pdf'
     DEFAULT_SOLUTION_PACKAGER = 'txt'
     PUZZLE_TEMPLATE = "/packaging/puzzle_template.html"
-    DEFAULT_PUZZLE_OUTPUT_DIR = ""  # current working director
-    PUZZLE_PDF_NAME = "testing_puzzle.pdf"
+    DEFAULT_PUZZLE_OUTPUT_DIR = "./out/puzzles_to_play"  # current working director
+    PUZZLE_PDF_NAME = "puzzle_{}.pdf"
     ANSWERKEY_TXT_NAME = "answerkey_{}.txt"
 
     def run(self):

@@ -5,9 +5,6 @@ This respository will create the Camouflage puzzle.  See the examplepuzzle.pdf
 Rules of the Puzzle
 - [Rules of the Puzzle](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#rules-of-the-puzzle)
 
-The Coding Competition:
-- [The Coding Competition](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#the-coding-competition)
-
 Structuring this work:
 - [Create a Word Bank](https://github.com/TurnUpTheMike/CamouflagePuzzle#create-a-word-bank)
 - [Create an AnswerKey From the Word Bank](https://github.com/TurnUpTheMike/CamouflagePuzzle#create-an-answerkey-from-the-word-bank)
@@ -24,20 +21,6 @@ Rules of the Puzzle
 -------------------
 
 Place each of the 26 letters of the alphabet once in the grid below to form a common word of <i>five or more letters</i> reading across in each line. Not all the letters in each line will be used; it's up to you to determine which ones are needed. Some letters may fit in more than one of the empty squares to form familiar words; however, only one arrangment of all of the letters of the alphabet will complete a word in each row. Hyphenated words, proper nouns, and plurals are not used.
-
-The Coding Competition
-----------------------
-
-When: May 23rd - June 6th
-This coding competition will be announced on May 23rd.  I'll accept submissions for the competition until June 6th.
-
-Who can enter: Anyone who makes a branch and pull request to the master branch will be considered. Team submissions are also accepted however only one prize is awarded.  
-
-What are we doing / How do you win: The goal is to consistently create challenging-generated-puzzles.  You must also provide the execution command to execute (documentation is nice, and I need to know the various flag values).  I expect that most of the submissions will be extensions to the AnswerKeyGenerator and/or the PuzzleGenerator.  A submission must also respect the instructions of the puzzle (found at the top of the example).
-
-How is the winner determined: Myself and other judges will attempt to solve puzzles from each of the submissions.  If you would like to be a judge, please send me an email at michael.pantaleano@wpengine.com.
-
-The Prize: The winning submission will be awarded a one-year subscription to GAMES magazine.  I'm estimating that the judges can come to a conclusion in a two week period.  I will attempt to announce and contact the winner on June 20th.
 
 ______________________________________________________________________
 Create a Word Bank
@@ -120,14 +103,14 @@ cd CamouflagePuzzle/camo
 Run with all defaults
 python3 camouflage.py
 
-Run hardcoded version
+Run hardcoded version:  The same puzzle everytime
 python3 camouflage.py --bank-generator hardcoded
 
-Run Pants way
-python3 camouflage.py --bank-generator flatfiles
+Run AZFirstItem:        This creates an easier puzzle randomly choosing words and letters
+python3 camouflage.py --answerkey-generator azfirstitem
 
-Run Alan way
-python3 camouflage.py --bank-generator alan
+Run Pants way:          This creates a more difficult puzzle attempting to make the answer look like multiple solutions
+python3 camouflage.py --answerkey-generator pants
 ```
 
 Packaging and Creating Artifacts

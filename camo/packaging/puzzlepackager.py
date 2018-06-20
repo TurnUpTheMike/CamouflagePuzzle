@@ -11,10 +11,22 @@ class PuzzlePackager:
     def __init__(self, properties):
         self.properties = properties
         self.html_template_file = self.properties.puzzle_template
-        self.output_file_name = os.path.join(self.properties.puzzle_output_dir, self.properties.puzzle_pdf_name)
+        self.output_file_name = self.get_output_filename(
+            self.properties.puzzle_output_dir,
+            self.properties.puzzle_pdf_name
+        )
+
+    def get_output_filename(self, filename_directory, filename_pattern):
+        if '{}' in filename_pattern:
+            timestamp = time.time()
+            formatted_timestamp = datetime.datetime.fromtimestamp(timestamp).strftime('%Y%m%d%H%M%S')
+            filename_pattern = filename_pattern.format(formatted_timestamp)
+
+        return os.path.join(filename_directory, filename_pattern)
 
     def write_puzzle(self, puzzle):
         puzzle_html = self.puzzle_to_html(puzzle)
+        print("writing puzzle {}".format(self.output_file_name))
         pdfkit.from_string(puzzle_html, self.output_file_name)
 
     def puzzle_to_html(self, puzzle):

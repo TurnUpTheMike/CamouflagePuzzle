@@ -12,11 +12,11 @@ class AnswerKeyPants(AnswerKey):
     def print_answerkey(self):
         print("------------{}-----------".format(self.__class__.__name__))
         for letter in "abcdefghijklmnopqrstuvwxyz":
-            print("{}: {}".format(letter, self.answers_unmodified[letter]))
+            print("{}: {} -> {}".format(letter, self.answers_unmodified[letter], self.answers[letter]))
         print("--------------------------------------")
 
     def get_answer_for_letter(self, letter):
-        return self.answers_unmodified[letter]
+        return "{}".format(self.answers_unmodified[letter])
 
 
 class AnswerKeyGeneratorPants(AnswerKeyGenerator):

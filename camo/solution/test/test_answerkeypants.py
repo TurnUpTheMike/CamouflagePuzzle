@@ -21,9 +21,9 @@ class TestAnswerKeyPants(unittest.TestCase):
         self.wordbank = WordBank(self.properties)
 
     @parameterized.expand([
-        ('e', "[a-df-z]"),
-        ('a', "[b-z]"),
-        ('z', "[a-y]"),
+        ('e', "[abcdfghijklmnopqrstuvwxyz]"),
+        ('a', "[bcdefghijklmnopqrstuvwxyz]"),
+        ('z', "[abcdefghijklmnopqrstuvwxy]"),
     ])
     def test_generate_not_letter_expression(self, letter, expected_expression):
         actual_expression = self.generator.generate_not_letter_expression(letter)
@@ -111,12 +111,13 @@ class TestAnswerKeyPants(unittest.TestCase):
         chosen_letter = 'a'
         chosen_word = 'planet'
 
-        self.wordbank.unique_words.add("apple")
+        self.wordbank.unique_words.add("potator")
         self.wordbank.unique_words.add("sample")
 
+        self.generator.flag_match_counts = False
         mashed_word = self.generator.choose_word(chosen_letter, chosen_word, self.wordbank)
 
-        self.assertEqual('applanet', mashed_word)
+        self.assertEqual('samplanet', mashed_word)
 
     def test_generate_answer_key(self):
         # A
@@ -220,7 +221,7 @@ class TestAnswerKeyPants(unittest.TestCase):
 
         # Generate the AnswerKey
         # self.generator.flag_verbose = True
-        self.generator.flag_match_counts = True
+        self.generator.flag_match_counts = False
         answerkey = self.generator.generate_answer_key(self.wordbank)
 
         # answerkey.print_answerkey()

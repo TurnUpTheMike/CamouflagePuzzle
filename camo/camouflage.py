@@ -9,6 +9,7 @@ from solution.answerkeypants import AnswerKeyGeneratorPants
 from solution.puzzle import Puzzle, PuzzleGenerator
 from packaging.puzzlepackager import PuzzlePackager, SolutionPackager
 from solution.puzzleutility import PuzzleUtility
+from validator.validator import PuzzleValidator
 
 
 class Camouflage:
@@ -46,6 +47,11 @@ class Camouflage:
         puzzle_generator = self.get_puzzle_generator(args)
         puzzle = puzzle_generator.generate_puzzle(answerkey)
         puzzle.print_puzzle()
+
+        puzzle_validator = PuzzleValidator(wordbank=wordbank, puzzle=puzzle)
+        if puzzle_validator.is_valid_puzzle() is False:
+            print(puzzle_validator.validator_error_details())
+            return
 
         if args.do_package_puzzle:
             print("Packaging Puzzle artifacts")

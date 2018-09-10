@@ -73,6 +73,4 @@ class AnswerKeyGenerator:
                 self.unavailable_words.add(word)
                 return word
 
-        import pdb
-        pdb.set_trace()
         raise Exception("Need more words for letter '{}'.  Could not find a word in its wordbank.".format(letter))

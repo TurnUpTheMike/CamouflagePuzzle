@@ -29,9 +29,8 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         self.flag_verbose = False
         self.flag_match_counts = True
         self.banned_hash = {i: [i] for i in "abcdefghijklmnopqrstuvwxyz"}
-        self.letter_list = []
-        for letter in "abcdefghijklmnopqrstuvwxyz":
-            self.letter_list.append(letter)
+        self.alphabet_list = [letter for letter in "abcdefghijklmnopqrstuvwxyz"]
+        self.rows_to_obscure = properties.rows_to_obscure
 
     def log(self, message):
         if self.flag_verbose:
@@ -45,18 +44,29 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         self.log("AnswerkeyGeneratorPants")
         answerkey = AnswerKeyPants()
 
-        for letter in "abcdefghijklmnopqrstuvwxyz":
+        letter_list = [letter for letter in "abcdefghijklmnopqrstuvwxyz"]
+        random.shuffle(letter_list)
+        count_rows_obscured = 0
+
+        for letter in letter_list:
             self.log("Choosing letter {}".format(letter))
             letter_set = wordbank.hash_by_letter[letter]
             word = self.choose_word_from_set(letter_set, letter)
-            word_bundle = self.choose_word(letter, word, wordbank)
-            answerkey.answers[letter] = word_bundle[0]
+            letter_index = self.util.letter_ndx_of_word(word, letter)
             answerkey.answers_unmodified[letter] = word
-            answerkey.letter_ndx_lookup[word_bundle[0]] = word_bundle[1]
+            if count_rows_obscured < self.rows_to_obscure:
+                word_bundle = self.choose_word(letter, letter_index, word, wordbank)
+                answerkey.answers[letter] = word_bundle[0]
+                answerkey.letter_ndx_lookup[word_bundle[0]] = word_bundle[1]
+                count_rows_obscured += 1
+            else:
+                answerkey.answers[letter] = word
+                answerkey.letter_ndx_lookup[word] = letter_index
+                self.log_matches("Chosen ({}) {} did not obscure".format(letter, word))
 
         return answerkey
 
-    def choose_word(self, letter, word, wordbank):
+    def choose_word(self, letter, letter_index, word, wordbank):
         letter_index = self.util.letter_ndx_of_word(word, letter)
         word_matches = self.get_words_that_almost_match(letter, letter_index, word, wordbank)
         self.log("Chosen ({}) {} had {} matches".format(letter, word, len(word_matches)))
@@ -126,6 +136,7 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         Search for word that almost match our <word> to pad the puzzle with
         
         :param letter: the chosen letter of the word
+        :param letter_index: the index of letter in word for where the chosen letter exists
         :param word: the chosen word
         :param wordbank: the wordbank to search in
         :return: a dictionary of  "word": re.match object
@@ -151,10 +162,10 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         chosen_letter_expression = self.generate_not_letter_expression(letter)
         program = re.compile(
             "((?:[a-z]{{0,{}}}{}|^))({})((?:$|{}[a-z]{{0,{}}}))".format(num_letters_on_left_side,
-                                                                  prefix_expression,
-                                                                  chosen_letter_expression,
-                                                                  suffix_expression,
-                                                                  num_letters_on_right_side))
+                                                                        prefix_expression,
+                                                                        chosen_letter_expression,
+                                                                        suffix_expression,
+                                                                        num_letters_on_right_side))
 
         found_words = {}
         for word in wordbank.unique_words:
@@ -206,7 +217,7 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         """
 
         banned_list = self.banned_hash[letter]
-        acceptable_letters = [n for n in self.letter_list if n not in banned_list]
+        acceptable_letters = [n for n in self.alphabet_list if n not in banned_list]
         expression = ''.join(acceptable_letters)
         return "[{}]".format(expression)
 

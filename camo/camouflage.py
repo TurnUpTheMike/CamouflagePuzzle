@@ -27,6 +27,7 @@ class Camouflage:
     DEFAULT_PUZZLE_OUTPUT_DIR = "./out/puzzles_to_play"  # current working director
     PUZZLE_PDF_NAME = "puzzle_{}.pdf"
     ANSWERKEY_TXT_NAME = "answerkey_{}.txt"
+    GENERATOR_ROWS_OBSCURED = 19
 
     def __init__(self):
         self.util = None
@@ -119,6 +120,11 @@ class Camouflage:
         parser.add_argument('--answerkey-txt-name', dest='answerkey_txt_name', type=str,
                             default=Camouflage.ANSWERKEY_TXT_NAME,
                             help="The name of the txt to create for the answerkey")
+
+        # Generator Specific Flags
+        parser.add_argument('--rows-obscured', dest="rows_to_obscure", type=str,
+                            help="number: 0 - 26",
+                            default=Camouflage.GENERATOR_ROWS_OBSCURED)
 
         # Debug Flags
         parser.add_argument('--do-package-puzzle', action='store_true',

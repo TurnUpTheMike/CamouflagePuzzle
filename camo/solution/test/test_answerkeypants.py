@@ -10,6 +10,7 @@ class Properties:
         self.puzzle_row_length = 13
         self.min_word_length = 5
         self.max_word_length = 13
+        self.rows_to_obscure = 19
 
 
 class TestAnswerKeyPants(unittest.TestCase):
@@ -118,7 +119,8 @@ class TestAnswerKeyPants(unittest.TestCase):
         self.wordbank.unique_words.add("sample")
 
         self.generator.flag_match_counts = False
-        mashed_word = self.generator.choose_word(chosen_letter, chosen_word, self.wordbank)
+        letter_index = self.utility.letter_ndx_of_word(chosen_word, chosen_letter)
+        mashed_word = self.generator.choose_word(chosen_letter, letter_index, chosen_word, self.wordbank)
 
         self.assertEqual(('samplanet', 5), mashed_word)
 

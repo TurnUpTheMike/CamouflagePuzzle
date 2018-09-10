@@ -8,6 +8,7 @@ class AnswerKeyPants(AnswerKey):
     def __init__(self):
         super().__init__()
         self.answers_unmodified = {}
+        self.letter_ndx_lookup = {}
 
     def print_answerkey(self):
         print("------------{}-----------".format(self.__class__.__name__))
@@ -17,6 +18,9 @@ class AnswerKeyPants(AnswerKey):
 
     def get_answer_for_letter(self, letter):
         return "{}".format(self.answers_unmodified[letter])
+
+    def letter_ndx_of_word(self, word, letter, chosen_letter_index):
+        return self.letter_ndx_lookup[word]
 
 
 class AnswerKeyGeneratorPants(AnswerKeyGenerator):
@@ -44,32 +48,34 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         for letter in "abcdefghijklmnopqrstuvwxyz":
             self.log("Choosing letter {}".format(letter))
             letter_set = wordbank.hash_by_letter[letter]
-            word = letter_set.pop()
-            answerkey.answers[letter] = self.choose_word(letter, word, wordbank)
+            word = self.choose_word_from_set(letter_set, letter)
+            word_bundle = self.choose_word(letter, word, wordbank)
+            answerkey.answers[letter] = word_bundle[0]
             answerkey.answers_unmodified[letter] = word
-            wordbank.remove_word(word)
+            answerkey.letter_ndx_lookup[word_bundle[0]] = word_bundle[1]
 
         return answerkey
 
     def choose_word(self, letter, word, wordbank):
-        word_matches = self.get_words_that_almost_match(letter, word, wordbank)
+        letter_index = self.util.letter_ndx_of_word(word, letter)
+        word_matches = self.get_words_that_almost_match(letter, letter_index, word, wordbank)
         self.log("Chosen ({}) {} had {} matches".format(letter, word, len(word_matches)))
         self.log_matches("Chosen ({}) {} had {} matches".format(letter, word, len(word_matches)))
 
         if len(word_matches) == 0:
-            return word
+            return word, letter_index
 
         # choose a word
         deterrent = self.choose_deterrent_word(word_matches)
 
         # combine the deterrent with the chosen word
-        mashed_word = self.create_mashed_word(letter, word, deterrent)
+        mashed_word_bundle = self.create_mashed_word(letter, letter_index, word, deterrent)
 
         # add the chosen-letter-banned-list to the banned list of deterrent's letter to prevent cycles
         self.add_to_banned_list(deterrent, letter)
 
         # mashup the word and the deterrent word
-        return mashed_word
+        return mashed_word_bundle
 
     def add_to_banned_list(self, deterrent, letter):
         self.log(deterrent.re)
@@ -79,15 +85,15 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
             self.banned_hash[deterrent_letter].append(banned_letter)
             self.log("adding {} to bucket {}".format(banned_letter, deterrent_letter))
 
-    def create_mashed_word(self, letter, word, deterrent):
+    def create_mashed_word(self, letter, letter_index, word, deterrent):
         """
         combine the word and the deterrent together
-        :param letter: 
-        :param word: 
+        :param letter:
+        :param letter_index:
+        :param word:
         :param deterrent: 
-        :return: string
+        :return: (string, ndx_of_chosen_letter)
         """
-        letter_index = self.util.letter_ndx_of_word(word, letter)
         word_prefix = word[:letter_index]
         word_suffix = word[letter_index + 1:]
         prefix_group = deterrent.groups()[0]
@@ -102,7 +108,7 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
             suffix_to_use = suffix_group
 
         mashed_word = "{}{}{}".format(prefix_to_use, letter, suffix_to_use)
-        return mashed_word
+        return mashed_word, len(prefix_to_use)
 
     def choose_deterrent_word(self, word_matches):
         """
@@ -115,7 +121,7 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         deterrent = match_values[random_index]
         return deterrent
 
-    def get_words_that_almost_match(self, letter, word, wordbank):
+    def get_words_that_almost_match(self, letter, letter_index, word, wordbank):
         """
         Search for word that almost match our <word> to pad the puzzle with
         
@@ -124,7 +130,6 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         :param wordbank: the wordbank to search in
         :return: a dictionary of  "word": re.match object
         """
-        letter_index = self.util.letter_ndx_of_word(word, letter)
         word_prefix = word[:letter_index]
         word_suffix = word[letter_index + 1:]
 

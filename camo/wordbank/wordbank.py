@@ -35,16 +35,6 @@ class WordBank:
 
         return True
 
-    def remove_word(self, word):
-        """
-        Remove a word from the wordbank
-        :param word: 
-        :return: 
-        """
-        for letter in word:
-            if word in self.hash_by_letter[letter]:
-                self.hash_by_letter[letter].remove(word)
-
     def print_wordbank(self):
         print("------------{}-----------".format(self.__class__.__name__))
         for letter in "abcdefghijklmnopqrstuvwxyz":
@@ -76,16 +66,6 @@ class WordBankAlan():
                 continue   # the word is too long for a letter this far back in the word
 
             self.hash_by_letter[letter].add(word)
-
-    def remove_word(self, word):
-        """
-        Remove a word from the wordbank
-        :param word: 
-        :return: 
-        """
-        for letter in word:
-            if word in self.hash_by_letter[letter]:
-                self.hash_by_letter[letter].remove(word)
 
     def print_wordbank(self):
         print("------------{}-----------".format(self.__class__.__name__))

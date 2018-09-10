@@ -28,12 +28,16 @@ class Camouflage:
     PUZZLE_PDF_NAME = "puzzle_{}.pdf"
     ANSWERKEY_TXT_NAME = "answerkey_{}.txt"
 
+    def __init__(self):
+        self.util = None
+
     def run(self):
         args = self.create_argument_parser()
 
         print("------ARGS-----")
         print(args)
         print("---------------")
+        self.util = PuzzleUtility(args)
 
         wordbank_generator = self.get_wordbank_generator(args)
         wordbank = wordbank_generator.generate_word_bank()
@@ -48,9 +52,11 @@ class Camouflage:
         puzzle = puzzle_generator.generate_puzzle(answerkey)
         puzzle.print_puzzle()
 
-        puzzle_validator = PuzzleValidator(wordbank=wordbank, puzzle=puzzle)
-        if puzzle_validator.is_valid_puzzle() is False:
+        puzzle_validator = PuzzleValidator(wordbank=wordbank, utility=self.util)
+        if puzzle_validator.is_valid_puzzle(puzzle=puzzle, answerkey=answerkey) is False:
             print(puzzle_validator.validator_error_details())
+            puzzle.print_puzzle_for_test()
+            answerkey.print_answerkey_for_test()
             return
 
         if args.do_package_puzzle:
@@ -146,14 +152,13 @@ class Camouflage:
         :param args:
         :return:
         """
-        util = PuzzleUtility(args)
 
         if args.answer_key_generator == 'azfirstitem':
-            return AnswerKeyGenerator(args, util)
+            return AnswerKeyGenerator(args, self.util)
         elif args.answer_key_generator == 'pants':
-            return AnswerKeyGeneratorPants(args, util)
+            return AnswerKeyGeneratorPants(args, self.util)
 
-        return AnswerKeyGenerator(args, util)
+        return AnswerKeyGenerator(args, self.util)
 
     def get_puzzle_generator(self, args):
         """
@@ -161,12 +166,11 @@ class Camouflage:
         :param args:
         :return:
         """
-        util = PuzzleUtility(args)
 
         if args.puzzle_generator == 'randompadding':
-            return PuzzleGenerator(args, util)
+            return PuzzleGenerator(args, self.util)
 
-        return PuzzleGenerator(args, util)
+        return PuzzleGenerator(args, self.util)
 
     def get_puzzle_packager(self, args):
         """
@@ -184,12 +188,11 @@ class Camouflage:
         A factory method to package the answerkey with
         :return:
         """
-        util = PuzzleUtility(args)
 
         if args.puzzle_packager == 'txt':
-            return SolutionPackager(args, util)
+            return SolutionPackager(args, self.util)
 
-        return SolutionPackager(args, util)
+        return SolutionPackager(args, self.util)
 
 if __name__ == '__main__':
     print("Starting Camoflauge Puzzle Creator")

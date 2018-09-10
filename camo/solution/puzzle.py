@@ -13,6 +13,13 @@ class Puzzle:
             print(row)
         print("---------------------------")
 
+    def print_puzzle_for_test(self):
+        print("-----------Puzzle for test-------------")
+        print("puzzle_rows = [")
+        for row in self.puzzle_rows:
+            print("\"{}\",".format(row))
+        print("]")
+
 
 class PuzzleGenerator:
     def __init__(self, properties, utility):

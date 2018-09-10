@@ -10,6 +10,13 @@ class AnswerKey:
             print("{}: {}".format(letter, self.answers[letter]))
         print("--------------------------------------")
 
+    def print_answerkey_for_test(self):
+        print("-----------AnswerKey for test----------")
+        print("answers = {")
+        for letter in "abcdefghijklmnopqrstuvwxyz":
+            print("\"{}\": \"{}\",".format(letter, self.get_answer_for_letter(letter)))
+        print("}")
+
     def get_answer_for_letter(self, letter):
         return self.answers[letter]
 

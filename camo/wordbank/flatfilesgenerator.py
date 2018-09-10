@@ -27,14 +27,14 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
                     self.read_source_file(os.path.join(path, filename))
 
     def read_source_file(self, filename):
-        file_handle = open(filename, "r")
-        file_contents = file_handle.read()
-        for original_word in file_contents.split():
-            word = self.format_word(original_word)
+        with open(filename, "r") as file_handle:
+            file_contents = file_handle.read()
+            for original_word in file_contents.split():
+                word = self.format_word(original_word)
 
-            if word not in self.negative_word_bank:
-                self.negative_word_bank.add(word)
-                self.word_bank.add_word(word)
+                if word not in self.negative_word_bank:
+                    self.negative_word_bank.add(word)
+                    self.word_bank.add_word(word)
 
     def format_word(self, word):
         """
@@ -67,11 +67,11 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
         :param filename: 
         :return: 
         """
-        file_handle = open(filename, "r")
-        file_contents = file_handle.read()
-        for word in file_contents.split():
-            formatted_word = self.format_word(word)
-            self.negative_word_bank.add(formatted_word)
+        with open(filename, "r") as file_handle:
+            file_contents = file_handle.read()
+            for word in file_contents.split():
+                formatted_word = self.format_word(word)
+                self.negative_word_bank.add(formatted_word)
 
     def is_valid_source_file_name(self, filename):
         """

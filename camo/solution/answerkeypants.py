@@ -48,12 +48,11 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         for letter in "abcdefghijklmnopqrstuvwxyz":
             self.log("Choosing letter {}".format(letter))
             letter_set = wordbank.hash_by_letter[letter]
-            word = letter_set.pop()
+            word = self.choose_word_from_set(letter_set, letter)
             word_bundle = self.choose_word(letter, word, wordbank)
             answerkey.answers[letter] = word_bundle[0]
             answerkey.answers_unmodified[letter] = word
             answerkey.letter_ndx_lookup[word_bundle[0]] = word_bundle[1]
-            wordbank.remove_word(word)
 
         return answerkey
 

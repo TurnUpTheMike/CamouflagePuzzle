@@ -52,14 +52,27 @@ class AnswerKeyGenerator:
     def __init__(self, properties, utility):
         self.properties = properties
         self.util = utility
+        self.unavailable_words = set()
 
     def generate_answer_key(self, wordbank):
         answerkey = AnswerKey()
 
         for letter in "abcdefghijklmnopqrstuvwxyz":
             letter_set = wordbank.hash_by_letter[letter]
-            word = letter_set.pop()
+            word = self.choose_word_from_set(letter_set, letter)
             answerkey.answers[letter] = word
-            wordbank.remove_word(word)
 
         return answerkey
+
+    def choose_word_from_set(self, word_set, letter):
+        max_attempts = len(word_set)
+        set_iter = iter(word_set)
+        for attempt in range(max_attempts):
+            word = next(set_iter)
+            if word not in self.unavailable_words:
+                self.unavailable_words.add(word)
+                return word
+
+        import pdb
+        pdb.set_trace()
+        raise Exception("Need more words for letter '{}'.  Could not find a word in its wordbank.".format(letter))

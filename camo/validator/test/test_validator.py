@@ -241,67 +241,75 @@ class TestPuzzleValidator(unittest.TestCase):
         self.assertIn("Two letters only fit on one row", self.validator.error_messages)
 
     def xtest_specific_puzzle(self):
+        """
+        This is used for testing the validity of a puzzle end-to-end
+        :return:
+        """
         puzzle = Puzzle()
         puzzle.puzzle_rows = [
-            "UINMATRESUMEJ",
-            "YBLPULSSTAIRU",
-            "CONVERTTIREOP",
-            "AVYPREVENTLYL",
-            "UTZOUTPUTOMAT",
-            "XECROWELCOMEF",
-            "YEXCUSQUEEZEZ",
-            "ZBIMPROVEDQHT",
-            "SISENSATIONGH",
-            "WDGCMAYORMERZ",
-            "PASWEAKNESSZB",
-            "MSUSUABEGINYU",
-            "IIRECOMMENDME",
-            "AIVALIGHTLYJY",
-            "UPARTICULARXB",
-            "KCWAISLLETTER",
-            "OSECONJURORXG",
-            "YIRRESISTAINK",
-            "MCIFITNESSELE",
-            "VXCOASDANCEET",
-            "PWINTEFRIENDJ",
-            "OREALIZECESSI",
-            "RTWENTWICEHVW",
-            "XTONIGHTOVEWW",
-            "TGANFOURTHCRC",
-            "TRAFFIXEDTBEU"
+            "ESEXUALERRIFI",
+            "BMAINTHINKQKY",
+            "NZLECTUREATES",
+            "OTHREACOUNTYN",
+            "OPOWDETECTIVE",
+            "THUNTEXPERTKR",
+            "BPROVOKESTERN",
+            "QLOCATJURORQL",
+            "ZGMEDIFFERENT",
+            "URWGENDERMISS",
+            "XBEHALQUICKVF",
+            "OPDEPTRUSTCJT",
+            "XMMAGAZINERAL",
+            "VOCCUPPURSUEU",
+            "WITHOUGHTEMUO",
+            "XEVANYWAYORPH",
+            "CEGRAPOSTEROX",
+            "RECESSIONVERT",
+            "HPRESUMEWSPAP",
+            "ORESUMATERIAL",
+            "SNOBODYNVISIB",
+            "WTCKBASICKUPP",
+            "XVUASSETYLEVZ",
+            "GSBASEBALLERY",
+            "FIGHTENTRANCE",
+            "JUNCURVERRORH"
         ]
 
         answerkey = AnswerKey()
         answerkey.answers = {
-            "a": "sensation",
-            "b": "begin",
-            "c": "particular",
-            "d": "dance",
-            "e": "welcome",
-            "f": "friend",
-            "g": "lightly",
-            "h": "tonight",
-            "i": "resist",
+            "a": "material",
+            "b": "baseball",
+            "c": "county",
+            "d": "gender",
+            "e": "asset",
+            "f": "different",
+            "g": "thought",
+            "h": "think",
+            "i": "recession",
             "j": "juror",
-            "k": "weakness",
-            "l": "letter",
-            "m": "recommend",
-            "n": "fitness",
-            "o": "improved",
-            "p": "output",
-            "q": "squeeze",
-            "r": "resume",
-            "s": "stair",
-            "t": "convert",
-            "u": "fourth",
-            "v": "prevent",
-            "w": "twice",
-            "x": "fixed",
-            "y": "mayor",
-            "z": "realize"
+            "k": "provoke",
+            "l": "sexual",
+            "m": "resume",
+            "n": "entrance",
+            "o": "poster",
+            "p": "pursue",
+            "q": "quick",
+            "r": "trust",
+            "s": "basic",
+            "t": "detective",
+            "u": "lecture",
+            "v": "curve",
+            "w": "anyway",
+            "x": "expert",
+            "y": "nobody",
+            "z": "magazine"
         }
 
+        self.validator.verbose = True
         is_valid = self.validator.is_valid_puzzle(puzzle, answerkey)
+
+        if not is_valid:
+            print(self.validator.validator_error_details())
 
         self.assertTrue(is_valid)
 

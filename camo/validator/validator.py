@@ -13,7 +13,6 @@ class PuzzleValidator:
 
     def is_valid_puzzle(self, puzzle, answerkey):
         solutions_by_row = self.solutions_for_all_rows(puzzle.puzzle_rows)
-
         if not self.does_each_row_have_at_least_one_solution(solutions_by_row):
             return False
 
@@ -28,7 +27,8 @@ class PuzzleValidator:
     def do_solutions_match_answerkey(self, row_solutions, answerkey):
         found_letters = set()
 
-        for row_solution in row_solutions:
+        for row_key in row_solutions:
+            row_solution = row_solutions[row_key]
             letter = row_solution[0]
             if letter not in answerkey.answers:
                 self.error_messages.append("letter {} not found in answerkey".format(letter))
@@ -36,7 +36,7 @@ class PuzzleValidator:
 
             word = row_solution[1]
             answer_word = answerkey.answers[letter]
-            if word != answer_word:
+            if answer_word.find(word) < 0: # the word may be a substring of answer
                 self.error_messages.append(
                     "Invalid AnswerKey: For letter {} answerkey word = {} found word = {}".format(
                         letter, answer_word, word
@@ -56,7 +56,7 @@ class PuzzleValidator:
 
     def create_solution_from_letter_counts(self, original_letter_counts, original_solutions_by_row):
         validated_row_solutions = {}  # puzzle_row => (letter, answer_word)
-        highest_frequency = original_letter_counts[len(original_letter_counts) - 1][1]
+        max_attempts = len(original_solutions_by_row)
 
         letter_counts = original_letter_counts
         remaining_solutions = original_solutions_by_row
@@ -64,7 +64,7 @@ class PuzzleValidator:
         self.vprint("The original letter counts are")
         self.pretty_letter_counts(original_letter_counts)
 
-        for solving_attempt in range(highest_frequency + 1):
+        for solving_attempt in range(max_attempts):
             for letter_frequency in letter_counts:
                 potential_num_answers_for_letter = letter_frequency[1]
                 if potential_num_answers_for_letter == 1:
@@ -88,6 +88,9 @@ class PuzzleValidator:
 
                     word_for_row = remaining_solutions[row_for_letter][letter_to_place][0]
                     validated_row_solutions[row_for_letter] = (letter_to_place, word_for_row)
+                    self.vprint("placed letter {} as word {} for row {}".format(
+                        letter_to_place, word_for_row, row_for_letter
+                    ))
 
                     # remove the row from the list of solutions
                     del remaining_solutions[row_for_letter]
@@ -102,7 +105,7 @@ class PuzzleValidator:
                 else:
                     self.vprint("time to reevaluate the letter counts")
                     break
-            self.vprint("preparing next solving attempt {} of {}".format(solving_attempt, highest_frequency))
+            self.vprint("preparing next solving attempt {} of {}".format(solving_attempt, max_attempts))
             if len(remaining_solutions) == 0:
                 break # we've found all of the easy solutions
 

@@ -32,6 +32,7 @@ class TestAnswerKeyPants(unittest.TestCase):
     def test_get_words_that_almost_match_suffixes_match(self):
         chosen_letter = 'c'
         chosen_word = 'abcde'
+        letter_index = self.utility.letter_ndx_of_word(chosen_word, chosen_letter)
 
         # test that these suffixes match
         self.wordbank.unique_words.add("zzabz")
@@ -50,7 +51,7 @@ class TestAnswerKeyPants(unittest.TestCase):
         expected_abzde = ('ab','z','de')
         expected_abzdez = ('ab','z','dez')
 
-        match_hash = self.generator.get_words_that_almost_match(chosen_letter, chosen_word, self.wordbank)
+        match_hash = self.generator.get_words_that_almost_match(chosen_letter, letter_index, chosen_word, self.wordbank)
 
         self.assertEqual(expected_zzabz, match_hash['zzabz'].groups())
         self.assertEqual(expected_zabzd, match_hash['zabzd'].groups())
@@ -65,6 +66,7 @@ class TestAnswerKeyPants(unittest.TestCase):
     def test_get_words_that_almost_match_prefixes_match(self):
         chosen_letter = 'c'
         chosen_word = 'abcde'
+        letter_index = self.utility.letter_ndx_of_word(chosen_word, chosen_letter)
 
         # test that these prefixes match the chosen suffix
         self.wordbank.unique_words.add("zdezz")
@@ -80,7 +82,7 @@ class TestAnswerKeyPants(unittest.TestCase):
         expected_bzdez = ('b','z','dez')
         expected_zabzde = ('zab','z','de')
 
-        match_hash = self.generator.get_words_that_almost_match(chosen_letter, chosen_word, self.wordbank)
+        match_hash = self.generator.get_words_that_almost_match(chosen_letter, letter_index, chosen_word, self.wordbank)
 
         self.assertEqual(expected_zdezz, match_hash['zdezz'].groups())
         self.assertEqual(expected_bzdez, match_hash['bzdez'].groups())
@@ -93,6 +95,7 @@ class TestAnswerKeyPants(unittest.TestCase):
     def test_get_words_that_almost_match_prefix_length(self):
         chosen_letter = 'c'
         chosen_word = 'abcde'
+        letter_index = self.utility.letter_ndx_of_word(chosen_word, chosen_letter)
 
         # test that length of prefixes
         self.wordbank.unique_words.add("zzzabz")
@@ -101,7 +104,7 @@ class TestAnswerKeyPants(unittest.TestCase):
         # prefix is too long
         self.wordbank.unique_words.add("yzzzzabz")
 
-        match_hash = self.generator.get_words_that_almost_match(chosen_letter, chosen_word, self.wordbank)
+        match_hash = self.generator.get_words_that_almost_match(chosen_letter, letter_index, chosen_word, self.wordbank)
 
         self.assertIn('zzzabz', match_hash)
         self.assertIn('zzzzabz', match_hash)
@@ -117,7 +120,7 @@ class TestAnswerKeyPants(unittest.TestCase):
         self.generator.flag_match_counts = False
         mashed_word = self.generator.choose_word(chosen_letter, chosen_word, self.wordbank)
 
-        self.assertEqual('samplanet', mashed_word)
+        self.assertEqual(('samplanet', 5), mashed_word)
 
     def test_generate_answer_key(self):
         # A

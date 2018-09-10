@@ -31,7 +31,7 @@ class PuzzleGenerator:
 
         for letter in "abcdefghijklmnopqrstuvwxyz":
             word = answerkey.answers[letter]
-            puzzle_row_text = self.create_puzzle_row(letter, word)
+            puzzle_row_text = self.create_puzzle_row(letter, word, answerkey)
             puzzle.puzzle_rows.append(puzzle_row_text)
 
         # Randomize the rows
@@ -39,9 +39,9 @@ class PuzzleGenerator:
 
         return puzzle
 
-    def create_puzzle_row(self, letter, word):
+    def create_puzzle_row(self, letter, word, answerkey):
         word_length = len(word)
-        letter_index = self.util.letter_ndx_of_word(word, letter)
+        letter_index = answerkey.letter_ndx_of_word(word, letter, self.util.chosen_letter_index)
 
         left_padding = self.create_left_padding(letter_index)
         right_padding = self.create_right_padding(letter_index, word_length)

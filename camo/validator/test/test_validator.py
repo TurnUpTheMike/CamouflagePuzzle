@@ -32,6 +32,7 @@ class TestPuzzleValidator(unittest.TestCase):
     @classmethod
     def create_test_wordbank(cls):
         wordbank_generator = WordBankGeneratorFlatFiles(cls.properties)
+        wordbank_generator.verbose = False
         wordbank = wordbank_generator.generate_word_bank()
         return wordbank
 

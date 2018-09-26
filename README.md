@@ -4,6 +4,7 @@ This respository will create the Camouflage puzzle.  See the examplepuzzle.pdf
 
 Rules of the Puzzle
 - [Rules of the Puzzle](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#rules-of-the-puzzle)
+- [Play Created Puzzles](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#play-created-puzzles)
 
 Structuring this work:
 - [Create a Word Bank](https://github.com/TurnUpTheMike/CamouflagePuzzle#create-a-word-bank)
@@ -21,6 +22,19 @@ Rules of the Puzzle
 -------------------
 
 Place each of the 26 letters of the alphabet once in the grid below to form a common word of <i>five or more letters</i> reading across in each line. Not all the letters in each line will be used; it's up to you to determine which ones are needed. Some letters may fit in more than one of the empty squares to form familiar words; however, only one arrangment of all of the letters of the alphabet will complete a word in each row. Hyphenated words, proper nouns, and plurals are not used.
+
+Play Created Puzzles
+--------------------
+
+Yes, we know that all of this technical stuff is great, but some people are here just for the puzzles.
+
+Here is where I've uploaded some of the puzzles created with this repository.  I'll continue to upload puzzles here.
+https://github.com/TurnUpTheMike/CamouflagePuzzle/tree/master/camo/out/puzzles_to_play
+
+Answer keys:
+https://github.com/TurnUpTheMike/CamouflagePuzzle/tree/master/camo/out/answer_keys
+
+The naming of these files includes a timestamp of when the puzzle was created.  Match the number in the filenames to determine which answerkey is for which puzzle.
 
 ______________________________________________________________________
 Create a Word Bank

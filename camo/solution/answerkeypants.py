@@ -30,7 +30,7 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         self.flag_match_counts = True
         self.banned_hash = {i: [i] for i in "abcdefghijklmnopqrstuvwxyz"}
         self.alphabet_list = [letter for letter in "abcdefghijklmnopqrstuvwxyz"]
-        self.rows_to_obscure = properties.rows_to_obscure
+        self.rows_to_obscure = int(properties.rows_to_obscure)
 
     def log(self, message):
         if self.flag_verbose:

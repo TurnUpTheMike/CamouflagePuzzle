@@ -8,11 +8,11 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
     def __init__(self, properties):
         super().__init__(properties)
         self.word_bank = None
-        self.negative_word_bank = None
+        self.negative_word_bank = set()
         self.verbose = True
 
     def generate_word_bank(self):
-        self.create_negative_word_bank(self.properties.dir_of_answer_keys)
+        self.create_negative_word_bank(self.properties.dir_negative_bank)
 
         self.word_bank = WordBank(self.properties)
         self.read_word_bank_sources(self.properties.dir_of_word_bank_src)

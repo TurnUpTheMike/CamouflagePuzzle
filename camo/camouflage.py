@@ -14,6 +14,7 @@ from validator.validator import PuzzleValidator
 
 class Camouflage:
     DEFAULT_DIR_ANSWER_KEYS = "/out/answer_keys"
+    DEFAULT_DIR_NEGATIVE_BANK = "/out/negativebank"
     DEFAULT_DIR_WORD_BANK_SRCS = "/lib/word_bank_src"
     MIN_WORD_LENGTH = 5
     MAX_WORD_LENGTH = 10
@@ -27,7 +28,7 @@ class Camouflage:
     DEFAULT_PUZZLE_OUTPUT_DIR = "./out/puzzles_to_play"  # current working director
     PUZZLE_PDF_NAME = "puzzle_{}.pdf"
     ANSWERKEY_TXT_NAME = "answerkey_{}.txt"
-    GENERATOR_ROWS_OBSCURED = 19
+    GENERATOR_ROWS_OBSCURED = 7
 
     def __init__(self):
         self.util = None
@@ -106,6 +107,9 @@ class Camouflage:
         parser.add_argument('--dir-word-bank', dest='dir_of_word_bank_src', type=str,
                             default=cwd + Camouflage.DEFAULT_DIR_WORD_BANK_SRCS,
                             help="A directory where word bank text sources are read from")
+        parser.add_argument('--dir-negative-bank', dest='dir_negative_bank', type=str,
+                            default=cwd + Camouflage.DEFAULT_DIR_NEGATIVE_BANK,
+                            help="A directory of text sources to exclude words from the bank")
         parser.add_argument('--puzzle-template', dest='puzzle_template', type=str,
                             default=cwd + Camouflage.PUZZLE_TEMPLATE,
                             help="The html file that is a template for the puzzle output")

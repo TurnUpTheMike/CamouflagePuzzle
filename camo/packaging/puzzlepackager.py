@@ -1,8 +1,6 @@
 from jinja2 import Environment, FileSystemLoader
 import os
 import pdfkit
-from solution.puzzle import Puzzle
-from solution.puzzleutility import PuzzleUtility
 import datetime
 import time
 
@@ -38,7 +36,7 @@ class PuzzlePackager:
         puzzle_html = environment.get_template(template_filename).render(
             title="Camouglage Puzzle",
             puzzle_rows=puzzle.puzzle_rows,
-            puzzle_row_length = self.properties.puzzle_row_length,
+            puzzle_row_length=self.properties.puzzle_row_length,
             chosen_letter_index=chosen_letter_index
         )
 

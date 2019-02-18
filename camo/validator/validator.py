@@ -1,7 +1,3 @@
-from solution.puzzle import Puzzle
-from wordbank.flatfilesgenerator import WordBankGeneratorFlatFiles
-from solution.puzzleutility import PuzzleUtility
-
 
 class PuzzleValidator:
     def __init__(self, wordbank, utility):
@@ -36,7 +32,7 @@ class PuzzleValidator:
 
             word = row_solution[1]
             answer_word = answerkey.answers[letter]
-            if answer_word.find(word) < 0: # the word may be a substring of answer
+            if answer_word.find(word) < 0:  # the word may be a substring of answer
                 self.error_messages.append(
                     "Invalid AnswerKey: For letter {} answerkey word = {} found word = {}".format(
                         letter, answer_word, word
@@ -107,7 +103,7 @@ class PuzzleValidator:
                     break
             self.vprint("preparing next solving attempt {} of {}".format(solving_attempt, max_attempts))
             if len(remaining_solutions) == 0:
-                break # we've found all of the easy solutions
+                break  # we've found all of the easy solutions
 
             letter_counts = self.create_letter_counts(remaining_solutions)
             self.vprint("new letter counts are:")

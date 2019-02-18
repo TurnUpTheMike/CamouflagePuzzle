@@ -29,8 +29,8 @@ class WordBankGeneratorAlan(WordBankGeneratorFlatFiles):
         Reads a file
         Formats each word
         Adds it to the negative_word_bank
-        :param filename: 
-        :return: 
+        :param filename:
+        :return:
         """
         file_handle = open(filename, "r")
         file_contents = file_handle.read()

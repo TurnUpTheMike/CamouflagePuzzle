@@ -7,6 +7,7 @@ from wordbank.wordbank import Discriminator
 from solution.answerkey import AnswerKeyGenerator
 from solution.answerkeypants import AnswerKeyGeneratorPants
 from solution.puzzle import PuzzleGenerator
+from solution.puzzleletterstats import PuzzleLetterStats
 from packaging.puzzlepackager import PuzzlePackager, SolutionPackager
 from solution.puzzleutility import PuzzleUtility
 from validator.validator import PuzzleValidator
@@ -21,14 +22,14 @@ class Camouflage:
     PUZZLE_ROW_LENGTH = 13
     DEFAULT_WORD_BANK_GENERATOR = 'flatfiles'
     DEFAULT_ANSWER_KEY_GENERATOR = 'pants'
-    DEFAULT_PUZZLE_GENERATOR = 'randompadding'
+    DEFAULT_PUZZLE_GENERATOR = 'singleletterstats'
     DEFAULT_PUZZLE_PACKAGER = 'pdf'
     DEFAULT_SOLUTION_PACKAGER = 'txt'
     PUZZLE_TEMPLATE = "/packaging/puzzle_template.html"
     DEFAULT_PUZZLE_OUTPUT_DIR = "./out/puzzles_to_play"  # current working director
     PUZZLE_PDF_NAME = "puzzle_{}.pdf"
     ANSWERKEY_TXT_NAME = "answerkey_{}.txt"
-    GENERATOR_ROWS_OBSCURED = 7
+    GENERATOR_ROWS_OBSCURED = 10
 
     def __init__(self):
         self.util = None
@@ -91,7 +92,7 @@ class Camouflage:
                             help="options: azfirstitem | pants",
                             default=Camouflage.DEFAULT_ANSWER_KEY_GENERATOR)
         parser.add_argument('--puzzle-generator', dest="puzzle_generator", type=str,
-                            help="options: randompadding",
+                            help="options: randompadding, singleletterstats",
                             default=Camouflage.DEFAULT_PUZZLE_GENERATOR)
         parser.add_argument('--puzzle-packager', dest="puzzle_packager", type=str,
                             help="options: pdf",
@@ -179,6 +180,8 @@ class Camouflage:
 
         if args.puzzle_generator == 'randompadding':
             return PuzzleGenerator(args, self.util)
+        elif args.puzzle_generator == 'singleletterstats':
+            return PuzzleLetterStats(args, self.util)
 
         return PuzzleGenerator(args, self.util)
 

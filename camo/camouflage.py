@@ -4,9 +4,9 @@ from wordbank.wordbankgenerator import WordBankGeneratorHardCoded
 from wordbank.flatfilesgenerator import WordBankGeneratorFlatFiles
 from wordbank.alangenerator import WordBankGeneratorAlan
 from wordbank.wordbank import Discriminator
-from solution.answerkey import AnswerKey, AnswerKeyGenerator
+from solution.answerkey import AnswerKeyGenerator
 from solution.answerkeypants import AnswerKeyGeneratorPants
-from solution.puzzle import Puzzle, PuzzleGenerator
+from solution.puzzle import PuzzleGenerator
 from packaging.puzzlepackager import PuzzlePackager, SolutionPackager
 from solution.puzzleutility import PuzzleUtility
 from validator.validator import PuzzleValidator
@@ -203,6 +203,7 @@ class Camouflage:
             return SolutionPackager(args, self.util)
 
         return SolutionPackager(args, self.util)
+
 
 if __name__ == '__main__':
     print("Starting Camoflauge Puzzle Creator")

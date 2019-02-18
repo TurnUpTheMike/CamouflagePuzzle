@@ -47,10 +47,10 @@ class TestAnswerKeyPants(unittest.TestCase):
         self.wordbank.unique_words.add("zzayz")
         self.wordbank.unique_words.add("zzybz")
 
-        expected_zzabz = ('zzab','z','')
-        expected_zabzd = ('zab','z','d')
-        expected_abzde = ('ab','z','de')
-        expected_abzdez = ('ab','z','dez')
+        expected_zzabz = ('zzab', 'z', '')
+        expected_zabzd = ('zab', 'z', 'd')
+        expected_abzde = ('ab', 'z', 'de')
+        expected_abzdez = ('ab', 'z', 'dez')
 
         match_hash = self.generator.get_words_that_almost_match(chosen_letter, letter_index, chosen_word, self.wordbank)
 
@@ -79,9 +79,9 @@ class TestAnswerKeyPants(unittest.TestCase):
         self.wordbank.unique_words.add("ybzde")
         self.wordbank.unique_words.add("ayzde")
 
-        expected_zdezz = ('','z','dezz')
-        expected_bzdez = ('b','z','dez')
-        expected_zabzde = ('zab','z','de')
+        expected_zdezz = ('', 'z', 'dezz')
+        expected_bzdez = ('b', 'z', 'dez')
+        expected_zabzde = ('zab', 'z', 'de')
 
         match_hash = self.generator.get_words_that_almost_match(chosen_letter, letter_index, chosen_word, self.wordbank)
 

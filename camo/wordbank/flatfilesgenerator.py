@@ -39,8 +39,6 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
     def format_word(self, word):
         """
         Takes the input word and formats it to a word that can be in an answer key
-        :param word: 
-        :return: 
         """
         lowered_word = word.lower()
         lettered_word = re.sub("[^a-z]", "", lowered_word)
@@ -64,8 +62,6 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
         Reads a file
         Formats each word
         Adds it to the negative_word_bank
-        :param filename: 
-        :return: 
         """
         with open(filename, "r") as file_handle:
             file_contents = file_handle.read()
@@ -76,8 +72,6 @@ class WordBankGeneratorFlatFiles(WordBankGeneratorBase):
     def is_valid_source_file_name(self, filename):
         """
         the filename is a text file that we can read words out of
-        :param filename: 
-        :return: 
         """
         return filename.endswith(".txt")
 

@@ -90,38 +90,38 @@ class TestPuzzleValidator(unittest.TestCase):
 
         solutions = self.validator.solutions_for_all_rows(puzzle_rows)
 
-        self.assertSolutionDict({'f': ['final'], 'm': ['criminal']}, solutions[puzzle_rows[0]])
-        self.assertSolutionDict({'e': ['violent']}, solutions[puzzle_rows[1]])
-        self.assertSolutionDict({'n': ['offering']}, solutions[puzzle_rows[2]])
-        self.assertSolutionDict({'h': ['north', 'northwest']}, solutions[puzzle_rows[3]])
-        self.assertSolutionDict({'v': ['poverty'], 'w': ['power']}, solutions[puzzle_rows[4]])
-        self.assertSolutionDict({'t': ['context'], 'd': ['second']}, solutions[puzzle_rows[5]])
-        self.assertSolutionDict({'l': ['float']}, solutions[puzzle_rows[6]])
-        self.assertSolutionDict({'r': ['rabbit'], 'k': ['think'], 'g': ['nothing', 'thing']}, solutions[puzzle_rows[7]])
-        self.assertSolutionDict({'p': ['pencil'], 'e': ['miracle']}, solutions[puzzle_rows[8]])
-        self.assertSolutionDict({'t': ['exploit'], 'q': ['quest'], 'g': ['guest']}, solutions[puzzle_rows[9]])
-        self.assertSolutionDict({'d': ['direct']}, solutions[puzzle_rows[10]])
-        self.assertSolutionDict({'m': ['mirror'], 'y': ['subsidy']}, solutions[puzzle_rows[11]])
-        self.assertSolutionDict({'s': ['symbol'], 'c': ['legacy']}, solutions[puzzle_rows[12]])
-        self.assertSolutionDict({'b': ['basis'], 'l': ['special']}, solutions[puzzle_rows[13]])
-        self.assertSolutionDict({'n': ['german'], 'y': ['mayor'], 'j': ['major']}, solutions[puzzle_rows[14]])
-        self.assertSolutionDict({'w': ['below']}, solutions[puzzle_rows[15]])
-        self.assertSolutionDict({'u': ['obvious'], 'e': ['estate']}, solutions[puzzle_rows[16]])
-        self.assertSolutionDict({'a': ['format', 'formation'], 'o': ['motion']}, solutions[puzzle_rows[17]])
-        self.assertSolutionDict({}, solutions[puzzle_rows[18]])
-        self.assertSolutionDict({'s': ['aggression']}, solutions[puzzle_rows[19]])
-        self.assertSolutionDict({'k': ['speak']}, solutions[puzzle_rows[20]])
-        self.assertSolutionDict({'x': ['texture'], 'r': ['mutter']}, solutions[puzzle_rows[21]])
-        self.assertSolutionDict({'f': ['helpful']}, solutions[puzzle_rows[22]])
-        self.assertSolutionDict({'i': ['sufficient']}, solutions[puzzle_rows[23]])
-        self.assertSolutionDict({'o': ['proper']}, solutions[puzzle_rows[24]])
-        self.assertSolutionDict({'b': ['beside'], 'z': ['organize'], 'c': ['organic']}, solutions[puzzle_rows[25]])
+        self.assert_solution_dict({'f': ['final'], 'm': ['criminal']}, solutions[puzzle_rows[0]])
+        self.assert_solution_dict({'e': ['violent']}, solutions[puzzle_rows[1]])
+        self.assert_solution_dict({'n': ['offering']}, solutions[puzzle_rows[2]])
+        self.assert_solution_dict({'h': ['north', 'northwest']}, solutions[puzzle_rows[3]])
+        self.assert_solution_dict({'v': ['poverty'], 'w': ['power']}, solutions[puzzle_rows[4]])
+        self.assert_solution_dict({'t': ['context'], 'd': ['second']}, solutions[puzzle_rows[5]])
+        self.assert_solution_dict({'l': ['float']}, solutions[puzzle_rows[6]])
+        self.assert_solution_dict({'r': ['rabbit'], 'k': ['think'], 'g': ['nothing', 'thing']}, solutions[puzzle_rows[7]])
+        self.assert_solution_dict({'p': ['pencil'], 'e': ['miracle']}, solutions[puzzle_rows[8]])
+        self.assert_solution_dict({'t': ['exploit'], 'q': ['quest'], 'g': ['guest']}, solutions[puzzle_rows[9]])
+        self.assert_solution_dict({'d': ['direct']}, solutions[puzzle_rows[10]])
+        self.assert_solution_dict({'m': ['mirror'], 'y': ['subsidy']}, solutions[puzzle_rows[11]])
+        self.assert_solution_dict({'s': ['symbol'], 'c': ['legacy']}, solutions[puzzle_rows[12]])
+        self.assert_solution_dict({'b': ['basis'], 'l': ['special']}, solutions[puzzle_rows[13]])
+        self.assert_solution_dict({'n': ['german'], 'y': ['mayor'], 'j': ['major']}, solutions[puzzle_rows[14]])
+        self.assert_solution_dict({'w': ['below']}, solutions[puzzle_rows[15]])
+        self.assert_solution_dict({'u': ['obvious'], 'e': ['estate']}, solutions[puzzle_rows[16]])
+        self.assert_solution_dict({'a': ['format', 'formation'], 'o': ['motion']}, solutions[puzzle_rows[17]])
+        self.assert_solution_dict({}, solutions[puzzle_rows[18]])
+        self.assert_solution_dict({'s': ['aggression']}, solutions[puzzle_rows[19]])
+        self.assert_solution_dict({'k': ['speak']}, solutions[puzzle_rows[20]])
+        self.assert_solution_dict({'x': ['texture'], 'r': ['mutter']}, solutions[puzzle_rows[21]])
+        self.assert_solution_dict({'f': ['helpful']}, solutions[puzzle_rows[22]])
+        self.assert_solution_dict({'i': ['sufficient']}, solutions[puzzle_rows[23]])
+        self.assert_solution_dict({'o': ['proper']}, solutions[puzzle_rows[24]])
+        self.assert_solution_dict({'b': ['beside'], 'z': ['organize'], 'c': ['organic']}, solutions[puzzle_rows[25]])
 
-    def assertSolutionDict(self, expected, actual):
+    def assert_solution_dict(self, expected, actual):
         """
-        :param expected: formatted like {'h': ['north', 'northwest']} 
+        :param expected: formatted like {'h': ['north', 'northwest']}
         :param actual: formatted like {'h': ['north', 'northwest']}
-        :return: 
+        :return:
         """
         self.assertEqual(len(expected), len(actual))
         for key in expected:
@@ -233,7 +233,7 @@ class TestPuzzleValidator(unittest.TestCase):
         letter_counts = self.validator.create_letter_counts(solutions)
 
         # self.validator.verbose = True
-        row_solutions = self.validator.create_solution_from_letter_counts(letter_counts, solutions)
+        self.validator.create_solution_from_letter_counts(letter_counts, solutions)
 
         self.assertGreater(len(self.validator.error_messages), 0)
         # The error message is either 'Row ABCDEF_ABCDEF already has a letter. No place to put letter c'

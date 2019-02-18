@@ -1,5 +1,4 @@
 from solution.answerkey import AnswerKeyGenerator, AnswerKey
-from solution.puzzleutility import PuzzleUtility
 import re
 import random
 
@@ -101,7 +100,7 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         :param letter:
         :param letter_index:
         :param word:
-        :param deterrent: 
+        :param deterrent:
         :return: (string, ndx_of_chosen_letter)
         """
         word_prefix = word[:letter_index]
@@ -122,7 +121,6 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
 
     def choose_deterrent_word(self, word_matches):
         """
-        
         :param word_matches: dictionary of "word": re.match object
         :return: re.match object
         """
@@ -134,7 +132,7 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
     def get_words_that_almost_match(self, letter, letter_index, word, wordbank):
         """
         Search for word that almost match our <word> to pad the puzzle with
-        
+
         :param letter: the chosen letter of the word
         :param letter_index: the index of letter in word for where the chosen letter exists
         :param word: the chosen word
@@ -180,8 +178,6 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
     def generate_prefix_expression(self, prefix):
         """
         example generate_prefix_expression('ab') yields ab|^b
-        :param prefix: 
-        :return: 
         """
         list_prefixes = [prefix]
 
@@ -194,8 +190,6 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
     def generate_suffix_expression(self, suffix):
         """
         example generate_suffix_expression("de" yields d$|de
-        :param suffix: 
-        :return: 
         """
         list_suffixes = []
 
@@ -212,8 +206,6 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         Generate a regex expression for a single letter that doesn't contain 'letter'
         example letter = e yeilds [a-df-z]
         assumes letter will be in the range of [a-z]
-        :param letter: 
-        :return: 
         """
 
         banned_list = self.banned_hash[letter]

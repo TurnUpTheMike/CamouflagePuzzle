@@ -40,7 +40,7 @@ class AnswerKey:
         This is the earliest index of the word that the chosen letter can be
         :param word_length:
         :param chosen_letter_index:
-        :return: 
+        :return:
         """
         if chosen_letter_index > word_length - 1:
             return 0

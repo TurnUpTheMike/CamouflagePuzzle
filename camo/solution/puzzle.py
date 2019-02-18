@@ -1,6 +1,5 @@
 import string
 import random
-from solution.puzzleutility import PuzzleUtility
 
 
 class Puzzle:

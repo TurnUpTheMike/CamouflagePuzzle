@@ -16,6 +16,7 @@ class Properties:
         cwd = os.path.dirname(os.path.abspath(__file__))
         self.dir_of_answer_keys = cwd + "/../../out/answer_keys"
         self.dir_of_word_bank_src = cwd + "/../../lib/word_bank_src"
+        self.dir_negative_bank = "/../../out/negativebank"
 
 
 # This is more of an integration test because I'm using the real word bank

@@ -16,6 +16,7 @@ Structuring this work:
 Other:
 - [Running Tests](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#running-tests)
 - [Packaging and Creating Artifacts](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#packaging-and-creating-artifacts)
+- [Dependencies](https://github.com/TurnUpTheMike/CamouflagePuzzle/blob/master/README.md#dependencies)
 
 ______________________________________________________________________
 Rules of the Puzzle
@@ -40,23 +41,23 @@ ______________________________________________________________________
 Create a Word Bank
 ------------------
 
-No hypenated word
-No proper nouns
-No plurals
-Minimum length of 5 letters
-Maximum length of 13 letters
-We should read a directory of AnswerKeys to create a NegativeWord Bank to not have the same word appear in multiple AnswerKeys
+No hypenated word  
+No proper nouns  
+No plurals  
+Minimum length of 5 letters  
+Maximum length of 13 letters  
+We should read a directory of AnswerKeys to create a NegativeWord Bank to not have the same word appear in multiple AnswerKeys  
 
-Should this Word Bank really be 26 separate word banks?
+Should this Word Bank really be 26 separate word banks?  
 'a' => Bank of Words for letter 'a'
 
 
 Create an AnswerKey From the Word Bank
 --------------------------------------
 
-Choose words from the Word Bank
-The letter chosen must be index 6 of the word, and the word must fit within the puzzle.
-Write to a ?txt? file this answer key for future negative word banks
+Choose words from the Word Bank  
+The letter chosen must be index 6 of the word, and the word must fit within the puzzle.  
+Write to a ?txt? file this answer key for future negative word banks  
 
 How well can we choose words such that letters could go in multiple places?
 
@@ -64,8 +65,8 @@ How well can we choose words such that letters could go in multiple places?
 Create a Puzzle From the Answer Key
 -----------------------------------
 
-Randomize the rows the of the answer
-Add letters to pad out the length of the answer key to 13 characters
+Randomize the rows the of the answer  
+Add letters to pad out the length of the answer key to 13 characters  
 Do we add more common letters to make the word less obvious?
 
 
@@ -81,11 +82,11 @@ Structure and properties to tie all of these together
 How do we kick this off?  command line?
 What properties do we accept?
 
-WordBank source dir?
-Negative wordbank source dir?
-Output dir?
-Puzzle row character length?  currently 13
-Minimum word length?          currently 5
+WordBank source dir?  
+Negative wordbank source dir?  
+Output dir?  
+Puzzle row character length?  currently 13  
+Minimum word length?          currently 5  
 
 
 
@@ -140,3 +141,17 @@ python3 camouflage.py --do-package-puzzle --answerkey-txt-name favorite_puzzle_n
 You can override the output puzzle pdf name with
 python3 camouflage.py --do-package-puzzle --puzzle-pdf-name favorite_puzzle.pdf
 ```
+
+Dependencies
+------------
+
+This runs on python versions 3.4, 3.5, 3.6, 3.7  
+Python dependencies are stored in `requirements.txt`  
+Install these python site packages by running `pip install -r requirements.txt`
+
+The package `wkhtmltopdf` used to create pdfs is not able to be installed via pip.
+```
+wkhtmltopdf --version
+wkhtmltopdf 0.12.4 (with patched qt)
+```
+A newer version of wkhtmltopdf will create distorted pdfs.  Use this specific version. 

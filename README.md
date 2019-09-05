@@ -155,3 +155,4 @@ wkhtmltopdf --version
 wkhtmltopdf 0.12.4 (with patched qt)
 ```
 A newer version of wkhtmltopdf will create distorted pdfs.  Use this specific version. 
+https://github.com/wkhtmltopdf/wkhtmltopdf/releases/0.12.4

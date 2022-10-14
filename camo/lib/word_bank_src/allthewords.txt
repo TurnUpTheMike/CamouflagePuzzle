@@ -175,7 +175,6 @@ every
 start
 hand
 might
-American
 show
 part
 about
@@ -210,7 +209,6 @@ move
 like
 night
 live
-Mr
 point
 believe
 hold
@@ -492,7 +490,6 @@ town
 road
 drive
 arm
-TRUE
 federal
 break
 better
@@ -544,7 +541,6 @@ need
 court
 produce
 eat
-American
 teach
 oil
 half
@@ -594,7 +590,6 @@ type
 attention
 draw
 film
-Republican
 tree
 source
 red
@@ -638,7 +633,6 @@ daughter
 administration
 south
 husband
-Congress
 floor
 campaign
 material
@@ -796,7 +790,6 @@ herself
 region
 television
 box
-TV
 training
 pretty
 trade
@@ -826,7 +819,6 @@ glass
 answer
 skill
 sister
-PM
 professor
 operation
 financial
@@ -905,7 +897,6 @@ expert
 that
 spring
 firm
-Democrat
 radio
 visit
 management
@@ -1037,7 +1028,6 @@ item
 reality
 coach
 step
-Mrs
 yard
 beat
 violence
@@ -1114,7 +1104,6 @@ no
 forest
 video
 global
-Senate
 reform
 access
 restaurant
@@ -1186,7 +1175,6 @@ conflict
 spirit
 experience
 replace
-British
 encourage
 argument
 by
@@ -1195,7 +1183,6 @@ camp
 brain
 feature
 afternoon
-AM
 weekend
 dozen
 possibility
@@ -1206,7 +1193,6 @@ battle
 beginning
 date
 generally
-African
 very
 sorry
 crisis
@@ -1221,7 +1207,6 @@ element
 vision
 status
 normal
-Chinese
 ship
 solution
 stone
@@ -1251,7 +1236,6 @@ supposed
 tradition
 winter
 village
-Soviet
 refuse
 sales
 roll
@@ -1268,16 +1252,13 @@ farm
 potential
 increase
 middle
-European
 presence
 independent
 district
 shape
 reader
-Ms
 contract
 crowd
-Christian
 express
 apartment
 willing
@@ -1368,8 +1349,6 @@ result
 insist
 failure
 annual
-French
-Christmas
 comment
 responsible
 affair
@@ -1440,7 +1419,6 @@ focus
 smile
 location
 clothes
-Indian
 quiet
 dress
 promise
@@ -1467,7 +1445,6 @@ hell
 dangerous
 remind
 moral
-United
 category
 relatively
 victory
@@ -1570,7 +1547,6 @@ fuel
 leaf
 direct
 dry
-Russian
 instruction
 fight
 pool
@@ -1626,7 +1602,6 @@ weather
 presidential
 emotional
 commitment
-Supreme
 bear
 pocket
 thin
@@ -1729,7 +1704,6 @@ capture
 prefer
 truly
 earth
-Japanese
 chest
 search
 thick
@@ -1767,7 +1741,6 @@ duty
 sheet
 ought
 ensure
-Catholic
 extremely
 extent
 component
@@ -1794,7 +1767,6 @@ estate
 guide
 circumstance
 snow
-English
 politician
 steal
 pursue
@@ -1807,7 +1779,6 @@ soil
 influence
 surgery
 correct
-Jewish
 blame
 estimate
 due
@@ -1835,7 +1806,6 @@ silence
 rating
 golden
 motion
-German
 gender
 solve
 fee
@@ -1915,7 +1885,6 @@ judgment
 clean
 except
 beer
-English
 reference
 tear
 doubt
@@ -2019,8 +1988,6 @@ cable
 towards
 expose
 rural
-AIDS
-Jew
 narrow
 cream
 secretary
@@ -2219,11 +2186,9 @@ shall
 error
 release
 cop
-Arab
 double
 walk
 sand
-Spanish
 rule
 hit
 print
@@ -2266,7 +2231,6 @@ phase
 present
 joke
 coat
-Mexican
 symptom
 contact
 manufacturer
@@ -2338,7 +2302,6 @@ analyze
 another
 attach
 for
-Indian
 disaster
 parking
 prospect
@@ -2369,7 +2332,6 @@ emphasis
 illustrate
 boot
 monitor
-Asian
 entertainment
 bean
 evaluation
@@ -2508,7 +2470,6 @@ date
 occasionally
 mayor
 consideration
-CEO
 secure
 pink
 smoke
@@ -2537,7 +2498,6 @@ wooden
 elementary
 concert
 aggressive
-FALSE
 intention
 channel
 extreme
@@ -2547,13 +2507,11 @@ protein
 quit
 absence
 roll
-Latin
 rapidly
 jail
 comment
 diversity
 honest
-Palestinian
 pace
 employment
 speaker
@@ -2613,11 +2571,9 @@ normally
 phrase
 ingredient
 stake
-Muslim
 dream
 fiber
 activist
-Islamic
 snap
 terrorism
 refugee
@@ -2658,8 +2614,6 @@ personally
 wonder
 clock
 chocolate
-Italian
-Canadian
 ceiling
 sweep
 advertising
@@ -2758,13 +2712,11 @@ terror
 though
 expansion
 elite
-Olympic
 dirt
 odd
 rice
 bullet
 tight
-Bible
 chart
 solar
 decline
@@ -2850,7 +2802,6 @@ unknown
 assistant
 offense
 counter
-DNA
 smell
 potentially
 transfer
@@ -2954,7 +2905,6 @@ comfort
 radical
 stress
 adapt
-Irish
 honey
 correspondent
 pale
@@ -3044,7 +2994,6 @@ given
 fund
 ski
 limitation
-OK
 trace
 appointment
 preference
@@ -3077,7 +3026,6 @@ qualify
 mall
 derive
 scandal
-PC
 helpful
 impress
 heel
@@ -3097,7 +3045,6 @@ tent
 examination
 publisher
 strengthen
-French
 proposed
 myth
 sophisticated
@@ -3125,7 +3072,6 @@ sufficient
 narrative
 photographer
 helicopter
-Catholic
 modest
 provider
 delay
@@ -3153,7 +3099,6 @@ motivation
 assignment
 restriction
 across
-Palestinian
 laboratory
 workshop
 differently
@@ -3188,19 +3133,16 @@ brilliant
 versus
 manufacturing
 risk
-Christian
 complex
 absolute
 chef
 discrimination
 offensive
-German
 suit
 boom
 register
 appoint
 heritage
-God
 terrorist
 dominant
 successfully
@@ -3338,7 +3280,6 @@ mouse
 rope
 concrete
 prescription
-African-American
 chase
 document
 brick
@@ -3519,7 +3460,6 @@ pig
 cold
 classical
 estimated
-T-shirt
 online
 unemployment
 civilization
@@ -3536,16 +3476,12 @@ developer
 reliable
 excitement
 beef
-Islam
-Roman
 stretch
 architecture
 occasional
 administrative
 elbow
 deadly
-Muslim
-Hispanic
 allegation
 tip
 confuse
@@ -3553,7 +3489,6 @@ airplane
 monthly
 duck
 dose
-Korean
 plead
 initiate
 lecture
@@ -3734,7 +3669,6 @@ undermine
 freshman
 sweat
 outer
-European
 drunk
 survey
 research
@@ -3805,7 +3739,6 @@ residence
 shame
 meaningful
 sidewalk
-Olympics
 technological
 signature
 pleasant
@@ -3887,7 +3820,6 @@ hers
 pastor
 jazz
 opera
-Japanese
 bite
 frame
 evil
@@ -3913,7 +3845,6 @@ decent
 gym
 oral
 clerk
-Israeli
 envelope
 reporting
 destination
@@ -3995,7 +3926,6 @@ gravity
 enroll
 diminish
 prevention
-Arab
 value
 minimize
 chop
@@ -4031,7 +3961,6 @@ prohibit
 representative
 content
 realistic
-Russian
 hidden
 command
 tender
@@ -4097,12 +4026,10 @@ stem
 elder
 pro
 inspiration
-Dutch
 quantity
 trailer
 mate
 o'clock
-Greek
 genius
 monument
 bid
@@ -4228,7 +4155,6 @@ revelation
 rent
 calm
 jewelry
-Cuban
 haul
 concede
 trace
@@ -4330,7 +4256,6 @@ utilize
 breeze
 costly
 ambitious
-Christianity
 presumably
 influential
 translation
@@ -4511,7 +4436,6 @@ colorful
 ideal
 constitution
 trainer
-Thanksgiving
 scent
 stack
 eyebrow
@@ -4578,7 +4502,6 @@ flood
 dip
 likewise
 informal
-Persian
 feather
 sphere
 tighten

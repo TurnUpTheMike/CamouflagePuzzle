@@ -145,14 +145,14 @@ python3 camouflage.py --do-package-puzzle --puzzle-pdf-name favorite_puzzle.pdf
 Dependencies
 ------------
 
-This runs on python versions 3.4, 3.5, 3.6, 3.7  
+This runs on python versions 3.4, 3.5, 3.6, 3.7, 3.10  
 Python dependencies are stored in `requirements.txt`  
 Install these python site packages by running `pip install -r requirements.txt`
 
 The package `wkhtmltopdf` used to create pdfs is not able to be installed via pip.
 ```
 wkhtmltopdf --version
-wkhtmltopdf 0.12.4 (with patched qt)
+wkhtmltopdf 0.12.6 (with patched qt)
 ```
-A newer version of wkhtmltopdf will create distorted pdfs.  Use this specific version. 
-https://github.com/wkhtmltopdf/wkhtmltopdf/releases/0.12.4
+
+https://github.com/wkhtmltopdf/wkhtmltopdf/releases

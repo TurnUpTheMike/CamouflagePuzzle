@@ -25,9 +25,6 @@ class PuzzlePackager:
     def write_puzzle(self, puzzle):
         puzzle_html = self.puzzle_to_html(puzzle)
         print("writing puzzle {}".format(self.output_file_name))
-        print("\n\n\n")
-        print(puzzle_html)
-        print("\n\n\n  HEREHERE")
         pdfkit.from_string(puzzle_html, self.output_file_name)
 
     def puzzle_to_html(self, puzzle):

@@ -45,14 +45,24 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
 
         letter_list = [letter for letter in "abcdefghijklmnopqrstuvwxyz"]
         random.shuffle(letter_list)
-        count_rows_obscured = 0
 
         for letter in letter_list:
-            self.log("Choosing letter {}".format(letter))
             letter_set = wordbank.hash_by_letter[letter]
             word = self.choose_word_from_set(letter_set, letter)
-            letter_index = self.util.letter_ndx_of_word(word, letter)
             answerkey.answers_unmodified[letter] = word
+
+        self.create_obscured_answers(wordbank, answerkey)
+
+        return answerkey        
+
+    def create_obscured_answers(self, wordbank, answerkey):
+        count_rows_obscured = 0
+
+        for letter in answerkey.answers_unmodified:
+            self.log("Choosing letter {}".format(letter))
+            word = answerkey.answers_unmodified[letter]
+            letter_index = self.util.letter_ndx_of_word(word, letter)
+            
             if count_rows_obscured < self.rows_to_obscure:
                 word_bundle = self.choose_word(letter, letter_index, word, wordbank)
                 answerkey.answers[letter] = word_bundle[0]

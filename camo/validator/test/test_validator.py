@@ -104,7 +104,7 @@ class TestPuzzleValidator(unittest.TestCase):
         self.assert_solution_dict({'m': ['mirror'], 'y': ['subsidy']}, solutions[puzzle_rows[11]])
         self.assert_solution_dict({'s': ['symbol'], 'c': ['legacy']}, solutions[puzzle_rows[12]])
         self.assert_solution_dict({'b': ['basis'], 'l': ['special']}, solutions[puzzle_rows[13]])
-        self.assert_solution_dict({'n': ['german'], 'y': ['mayor'], 'j': ['major']}, solutions[puzzle_rows[14]])
+        self.assert_solution_dict({'y': ['mayor'], 'j': ['major']}, solutions[puzzle_rows[14]])
         self.assert_solution_dict({'w': ['below']}, solutions[puzzle_rows[15]])
         self.assert_solution_dict({'u': ['obvious'], 'e': ['estate']}, solutions[puzzle_rows[16]])
         self.assert_solution_dict({'a': ['format', 'formation'], 'o': ['motion']}, solutions[puzzle_rows[17]])

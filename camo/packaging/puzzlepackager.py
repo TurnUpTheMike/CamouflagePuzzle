@@ -13,6 +13,7 @@ class PuzzlePackager:
             self.properties.puzzle_output_dir,
             self.properties.puzzle_pdf_name
         )
+        self.environment_home = True
 
     def get_output_filename(self, filename_directory, filename_pattern):
         if '{}' in filename_pattern:
@@ -25,7 +26,14 @@ class PuzzlePackager:
     def write_puzzle(self, puzzle):
         puzzle_html = self.puzzle_to_html(puzzle)
         print("writing puzzle {}".format(self.output_file_name))
-        pdfkit.from_string(puzzle_html, self.output_file_name)
+
+        if self.environment_home:
+            path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+            config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+            pdfkit.from_string(puzzle_html, self.output_file_name, configuration=config)
+        else: 
+            pdfkit.from_string(puzzle_html, self.output_file_name)
+        
 
     def puzzle_to_html(self, puzzle):
         template_filename = os.path.basename(self.html_template_file)

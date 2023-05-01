@@ -15,6 +15,7 @@ class Properties:
         self.puzzle_output_dir = ""
         self.puzzle_pdf_name = "testing_puzzle.pdf"
         self.answerkey_txt_name = "answerkey_{}.txt"
+        self.answer_key_generator = "pants"
         self.dir_of_answer_keys = current_directory
 
 

@@ -13,9 +13,12 @@ class PuzzlePackager:
             self.properties.puzzle_output_dir,
             self.properties.puzzle_pdf_name
         )
-        self.environment_home = True
 
     def get_output_filename(self, filename_directory, filename_pattern):
+        if self.properties.answer_key_generator == 'theme':
+            pdf_name = filename_pattern.format(self.properties.theme.replace('.csv', ''))
+            return os.path.join(filename_directory, pdf_name)
+
         if '{}' in filename_pattern:
             timestamp = time.time()
             formatted_timestamp = datetime.datetime.fromtimestamp(timestamp).strftime('%Y%m%d%H%M%S')
@@ -27,7 +30,7 @@ class PuzzlePackager:
         puzzle_html = self.puzzle_to_html(puzzle)
         print("writing puzzle {}".format(self.output_file_name))
 
-        if self.environment_home:
+        if self.properties.environment_home:
             path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
             config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
             pdfkit.from_string(puzzle_html, self.output_file_name, configuration=config)
@@ -62,11 +65,15 @@ class SolutionPackager:
             letter = row[self.util.chosen_letter_index]
             word = answerkey.get_answer_for_letter(letter.lower())
             output_array.append(word.upper())
-            output_array.append(os.linesep)
+            output_array.append('\n')
 
         return ''.join(output_array)
 
     def get_answerkey_filename(self):
+        if self.properties.answer_key_generator == 'theme':
+            answerkey_name = self.properties.answerkey_txt_name.format(self.properties.theme.replace('.csv', ''))
+            return os.path.join(self.properties.dir_of_answer_keys, answerkey_name)
+
         filename = self.properties.answerkey_txt_name
         if '{}' in filename:
             timestamp = time.time()

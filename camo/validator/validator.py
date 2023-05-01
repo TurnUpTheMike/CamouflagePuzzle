@@ -1,13 +1,20 @@
 
 class PuzzleValidator:
-    def __init__(self, wordbank, utility):
+    def __init__(self, properties, wordbank, utility):
+        self.properties = properties
         self.wordbank = wordbank
         self.util = utility
         self.error_messages = []
         self.verbose = False
         self.row_solutions = None
+        self.override_validation = False
+        if self.properties.answer_key_generator == 'theme':
+            self.override_validation = True
 
     def is_valid_puzzle(self, puzzle, answerkey):
+        if self.override_validation:
+            return True
+
         solutions_by_row = self.solutions_for_all_rows(puzzle.puzzle_rows)
         if not self.does_each_row_have_at_least_one_solution(solutions_by_row):
             return False

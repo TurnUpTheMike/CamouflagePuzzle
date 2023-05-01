@@ -17,6 +17,7 @@ class Properties:
         self.dir_of_answer_keys = cwd + "/../../out/answer_keys"
         self.dir_of_word_bank_src = cwd + "/../../lib/word_bank_src"
         self.dir_negative_bank = "/../../out/negativebank"
+        self.answer_key_generator = "pants"
 
 
 # This is more of an integration test because I'm using the real word bank
@@ -28,7 +29,7 @@ class TestPuzzleValidator(unittest.TestCase):
 
     def setUp(self):
         self.util = PuzzleUtility(self.properties)
-        self.validator = PuzzleValidator(wordbank=self.wordbank, utility=self.util)
+        self.validator = PuzzleValidator(properties=self.properties, wordbank=self.wordbank, utility=self.util)
 
     @classmethod
     def create_test_wordbank(cls):

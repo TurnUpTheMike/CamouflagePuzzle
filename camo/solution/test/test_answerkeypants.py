@@ -1,6 +1,6 @@
 import unittest
 from wordbank.wordbank import WordBank
-from solution.answerkeypants import AnswerKeyGeneratorPants
+from solution.answerkeypants import AnswerKeyGeneratorPants, AnswerKeyGeneratorTheme
 from solution.puzzleutility import PuzzleUtility
 from parameterized import parameterized
 
@@ -20,6 +20,7 @@ class TestAnswerKeyPants(unittest.TestCase):
         self.utility = PuzzleUtility(self.properties)
         self.generator = AnswerKeyGeneratorPants(self.properties, self.utility)
         self.wordbank = WordBank(self.properties)
+        return super().setUp()
 
     @parameterized.expand([
         ('e', "[abcdfghijklmnopqrstuvwxyz]"),

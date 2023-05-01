@@ -1,3 +1,5 @@
+import csv
+import os
 from solution.answerkey import AnswerKeyGenerator, AnswerKey
 import re
 import random
@@ -224,9 +226,30 @@ class AnswerKeyGeneratorPants(AnswerKeyGenerator):
         return "[{}]".format(expression)
 
 
+class AnswerKeyGeneratorTheme(AnswerKeyGeneratorPants):
+    def __init__(self, properties, utility):
+        super().__init__(properties, utility)
+    
+    def generate_answer_key(self, wordbank):
+        self.log("AnswerkeyGeneratorTheme")
+        theme_file = os.path.join(self.properties.dir_of_theme, self.properties.theme)
+        print(f'reading theme {theme_file}\n')
 
+        answerkey = self.create_answer_key_from_csv(theme_file)
 
+        self.create_obscured_answers(wordbank, answerkey)
 
+        return answerkey 
+
+    def create_answer_key_from_csv(self, theme_file):
+        answerkey = AnswerKeyPants()
+
+        with open(theme_file, 'r') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                answerkey.answers_unmodified[row['letter']] = row['answer']
+
+        return answerkey
 
 
 

@@ -5,7 +5,7 @@ from wordbank.flatfilesgenerator import WordBankGeneratorFlatFiles
 from wordbank.alangenerator import WordBankGeneratorAlan
 from wordbank.wordbank import Discriminator
 from solution.answerkey import AnswerKeyGenerator
-from solution.answerkeypants import AnswerKeyGeneratorPants
+from solution.answerkeypants import AnswerKeyGeneratorPants, AnswerKeyGeneratorTheme
 from solution.puzzle import PuzzleGenerator
 from solution.puzzleletterstats import PuzzleLetterStats
 from packaging.puzzlepackager import PuzzlePackager, SolutionPackager
@@ -30,6 +30,8 @@ class Camouflage:
     PUZZLE_PDF_NAME = "puzzle_{}.pdf"
     ANSWERKEY_TXT_NAME = "answerkey_{}.txt"
     GENERATOR_ROWS_OBSCURED = 10
+    THEME_DIRECTIORY = "./lib/theme"
+    DEFAULT_THEME_NAME = "theme_name.csv"
 
     def __init__(self):
         self.util = None
@@ -55,7 +57,7 @@ class Camouflage:
         puzzle = puzzle_generator.generate_puzzle(answerkey)
         puzzle.print_puzzle()
 
-        puzzle_validator = PuzzleValidator(wordbank=wordbank, utility=self.util)
+        puzzle_validator = PuzzleValidator(properties=args, wordbank=wordbank, utility=self.util)
         if puzzle_validator.is_valid_puzzle(puzzle=puzzle, answerkey=answerkey) is False:
             print(puzzle_validator.validator_error_details())
             puzzle.print_puzzle_for_test()
@@ -114,6 +116,12 @@ class Camouflage:
         parser.add_argument('--puzzle-template', dest='puzzle_template', type=str,
                             default=cwd + Camouflage.PUZZLE_TEMPLATE,
                             help="The html file that is a template for the puzzle output")
+        parser.add_argument('--theme', dest='theme', type=str,
+                            default=Camouflage.DEFAULT_THEME_NAME,
+                            help="theme_name.csv should be found in the /lib/theme/ directory")
+        parser.add_argument('--theme-dir', dest='dir_of_theme', type=str,
+                            default=Camouflage.THEME_DIRECTIORY,
+                            help="/lib/theme")
 
         # Output Sources
         parser.add_argument('--puzzle-output-dir', dest='puzzle_output_dir', type=str,
@@ -136,6 +144,8 @@ class Camouflage:
                             help="Will create a pdf of the puzzle")
         parser.add_argument('--display-wordbank', action='store_true',
                             help="Whether to print the wordbank to the console")
+        parser.add_argument('--environment-home', action='store_false',
+                            help="true: windows   false: linux")
 
         arguments = parser.parse_args()
         return arguments
@@ -164,10 +174,15 @@ class Camouflage:
         :return:
         """
 
+        if args.theme != Camouflage.DEFAULT_THEME_NAME:
+            return AnswerKeyGeneratorTheme(args, self.util)
+
         if args.answer_key_generator == 'azfirstitem':
             return AnswerKeyGenerator(args, self.util)
         elif args.answer_key_generator == 'pants':
             return AnswerKeyGeneratorPants(args, self.util)
+        elif args.answer_key_generator == 'theme':
+            return AnswerKeyGeneratorTheme(args, self.util)
 
         return AnswerKeyGenerator(args, self.util)
 

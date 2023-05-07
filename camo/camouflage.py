@@ -21,7 +21,7 @@ class Camouflage:
     MAX_WORD_LENGTH = 10
     PUZZLE_ROW_LENGTH = 13
     DEFAULT_WORD_BANK_GENERATOR = 'flatfiles'
-    DEFAULT_ANSWER_KEY_GENERATOR = 'pants'
+    DEFAULT_ANSWER_KEY_GENERATOR = 'theme'
     DEFAULT_PUZZLE_GENERATOR = 'singleletterstats'
     DEFAULT_PUZZLE_PACKAGER = 'pdf'
     DEFAULT_SOLUTION_PACKAGER = 'txt'
@@ -30,7 +30,7 @@ class Camouflage:
     PUZZLE_PDF_NAME = "puzzle_{}.pdf"
     ANSWERKEY_TXT_NAME = "answerkey_{}.txt"
     GENERATOR_ROWS_OBSCURED = 10
-    THEME_DIRECTIORY = "./lib/theme"
+    THEME_DIRECTIORY = "/lib/theme"
     DEFAULT_THEME_NAME = "theme_name.csv"
 
     def __init__(self):
@@ -120,7 +120,7 @@ class Camouflage:
                             default=Camouflage.DEFAULT_THEME_NAME,
                             help="theme_name.csv should be found in the /lib/theme/ directory")
         parser.add_argument('--theme-dir', dest='dir_of_theme', type=str,
-                            default=Camouflage.THEME_DIRECTIORY,
+                            default=cwd + Camouflage.THEME_DIRECTIORY,
                             help="/lib/theme")
 
         # Output Sources

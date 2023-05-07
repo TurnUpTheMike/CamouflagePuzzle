@@ -233,7 +233,7 @@ class AnswerKeyGeneratorTheme(AnswerKeyGeneratorPants):
     def generate_answer_key(self, wordbank):
         self.log("AnswerkeyGeneratorTheme")
         theme_file = os.path.join(self.properties.dir_of_theme, self.properties.theme)
-        print(f'reading theme {theme_file}\n')
+        print(f'reading theme {theme_file}')
 
         answerkey = self.create_answer_key_from_csv(theme_file)
 

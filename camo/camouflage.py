@@ -144,7 +144,7 @@ class Camouflage:
                             help="Will create a pdf of the puzzle")
         parser.add_argument('--display-wordbank', action='store_true',
                             help="Whether to print the wordbank to the console")
-        parser.add_argument('--environment-home', action='store_false',
+        parser.add_argument('--environment-home', action='store_true',
                             help="true: windows   false: linux")
 
         arguments = parser.parse_args()

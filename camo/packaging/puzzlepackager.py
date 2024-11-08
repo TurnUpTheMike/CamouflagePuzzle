@@ -29,6 +29,7 @@ class PuzzlePackager:
     def write_puzzle(self, puzzle):
         puzzle_html = self.puzzle_to_html(puzzle)
         print("writing puzzle {}".format(self.output_file_name))
+        print(f'environment_home? {self.properties.environment_home}')
 
         if self.properties.environment_home:
             path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
@@ -36,7 +37,6 @@ class PuzzlePackager:
             pdfkit.from_string(puzzle_html, self.output_file_name, configuration=config)
         else: 
             pdfkit.from_string(puzzle_html, self.output_file_name)
-        
 
     def puzzle_to_html(self, puzzle):
         template_filename = os.path.basename(self.html_template_file)

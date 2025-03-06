@@ -104,10 +104,10 @@ Running Unit Tests
 cd CamouflagePuzzle/camo
 
 Run all the tests
-python3 -m unittest
+python -m unittest
 
 Run a specific test
-python3 -m unittest solution.test.testpuzzle.TestPuzzleGenerator.test_create_right_padding
+python -m unittest solution.test.testpuzzle.TestPuzzleGenerator.test_create_right_padding
 ```
 
 Running End To End
@@ -116,30 +116,30 @@ Running End To End
 cd CamouflagePuzzle/camo
 
 Run with all defaults
-python3 camouflage.py
+python camouflage.py
 
 Run hardcoded version:  The same puzzle everytime
-python3 camouflage.py --bank-generator hardcoded
+python camouflage.py --bank-generator hardcoded
 
 Run AZFirstItem:        This creates an easier puzzle randomly choosing words and letters
-python3 camouflage.py --answerkey-generator azfirstitem
+python camouflage.py --answerkey-generator azfirstitem
 
 Run Pants way:          This creates a more difficult puzzle attempting to make the answer look like multiple solutions
-python3 camouflage.py --answerkey-generator pants
+python camouflage.py --answerkey-generator pants
 ```
 
 Packaging and Creating Artifacts
 --------------------------------
 ```
 This flag will create a pdf and an answerkey txt
-python3 camouflage.py --do-package-puzzle
+python camouflage.py --do-package-puzzle
 
 The default answerkey filename is answerkey_{}.txt and a timestamp will be formatted into the filename
 You can override the output answerkey filename with
-python3 camouflage.py --do-package-puzzle --answerkey-txt-name favorite_puzzle_name.txt
+python camouflage.py --do-package-puzzle --answerkey-txt-name favorite_puzzle_name.txt
 
 You can override the output puzzle pdf name with
-python3 camouflage.py --do-package-puzzle --puzzle-pdf-name favorite_puzzle.pdf
+python camouflage.py --do-package-puzzle --puzzle-pdf-name favorite_puzzle.pdf
 ```
 
 Dependencies
